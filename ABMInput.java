@@ -43,6 +43,22 @@ public class ABMInput {
      */
     private boolean[] PUV;
 
+    public int getNumpoints () {
+        return this.NUMPOINTS;
+    }
+
+    public double[] getPoints () {
+        return this.POINTS;
+    }
+
+    public LICParameters getLICParameters () {
+        return this.PARAMETERS;
+    }
+
+    public Connector[][] getLCM () {
+        return this.LCM;
+    }
+
     /**
      * Returns a string representation of the object
      * @return a string representing the object
@@ -72,26 +88,29 @@ public class ABMInput {
         }
 
         // We need to fetch each individual LIC parameters
-        this.PARAMETERS = new LICParameters();
-        this.PARAMETERS.LENGTH1 = io.nextDouble();
-        this.PARAMETERS.RADIUS1 = io.nextDouble();
-        this.PARAMETERS.EPSILON = io.nextDouble();
-        this.PARAMETERS.AREA1 = io.nextDouble();
-        this.PARAMETERS.Q_POINTS = io.nextInt();
-        this.PARAMETERS.QUADS = io.nextInt();
-        this.PARAMETERS.DIST = io.nextDouble();
-        this.PARAMETERS.N_POINTS = io.nextInt();
-        this.PARAMETERS.K_POINTS = io.nextInt();
-        this.PARAMETERS.A_POINTS = io.nextInt();
-        this.PARAMETERS.B_POINTS = io.nextInt();
-        this.PARAMETERS.C_POINTS = io.nextInt();
-        this.PARAMETERS.D_POINTS = io.nextInt();
-        this.PARAMETERS.E_POINTS = io.nextInt();
-        this.PARAMETERS.F_POINTS = io.nextInt();
-        this.PARAMETERS.G_POINTS = io.nextInt();
-        this.PARAMETERS.LENGTH2 = io.nextDouble();
-        this.PARAMETERS.RADIUS2 = io.nextDouble();
-        this.PARAMETERS.AREA2 = io.nextDouble();
+        double length1 = io.nextDouble();
+        double radius1 = io.nextDouble();
+        double epsilon = io.nextDouble();
+        double area1 = io.nextDouble();
+        int qPoints = io.nextInt();
+        int quads = io.nextInt();
+        double dist = io.nextDouble();
+        int nPoints = io.nextInt();
+        int kPoints = io.nextInt();
+        int aPoints = io.nextInt();
+        int bPoints = io.nextInt();
+        int cPoints = io.nextInt();
+        int dPoints = io.nextInt();
+        int ePoints = io.nextInt();
+        int fPoints = io.nextInt();
+        int gPoints = io.nextInt();
+        double length2 = io.nextDouble();
+        double radius2 = io.nextDouble();
+        double area2 = io.nextDouble();
+        this.PARAMETERS = new LICParameters(length1, radius1, epsilon, 
+            area1, qPoints, quads, dist, nPoints, kPoints, aPoints, 
+            bPoints, cPoints, dPoints, ePoints, fPoints, gPoints, 
+            length2, radius2, area2);
 
         this.LCM = new Connector[15][15];
         for (int i = 0; i < 15; i++) {
