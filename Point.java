@@ -12,6 +12,12 @@ public class Point {
      */
     final private double y;
 
+    /**
+     * Creates a new point object modeling a point in 2-D space.
+     * @param  x the x-coordinate in the 2-D space
+     * @param  y the y-coordinate in the 2-D space
+     * @return   the new point object
+     */
     public Point (double x, double y) {
         this.x = x;
         this.y = y;
@@ -32,12 +38,46 @@ public class Point {
     }
 
     /**
+     * Calculates which quadrant the point lies in.
+     * The return value will be in the range [1,4]
+     * @return the quadrant in which the point is in
+     */
+    public int quadrant () {
+        if (this.x >= 0) {
+            if (this.y >= 0) return 1;
+            else return 4;
+        } else {
+            if (this.y >= 0) return 2;
+            else return 3;
+        }
+    }
+
+    /**
      * Calculates the euclidian distance from this point to point p
      * @param  p Point to calculate distance to
      * @return   Distance from this point to point p
      */
     public double distanceTo (Point p) {
         return Math.sqrt(Math.pow(this.x - p.x, 2) + Math.pow(this.y - p.y, 2));
+    }
+
+    /**
+     * Returns the dot product of this and point p
+     * @param  p The point to perform the dot product with
+     * @return   the dot product of this and p
+     */
+    public double dotProduct (Point p) {
+        return (this.x * p.x) + (this.y * p.y);
+    }
+
+    /**
+     * Returns a new point with coordinates equal to component-wise subtraction with
+     * this point as starting reference.
+     * @param  p the point to subtract this with
+     * @return   a new point with coordinates equal to component-wise subtraction
+     */
+    public Point minus (Point p) {
+        return new Point(this.x - p.x, this.y - p.y);
     }
 
     /**
