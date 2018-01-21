@@ -11,7 +11,7 @@ public class ABMInput {
     /**
      * The observed data-points
      */
-    private double[] POINTS;
+    private Point[] POINTS;
 
     /** 
      * Holds parameters for the LIC calculations
@@ -47,7 +47,7 @@ public class ABMInput {
         return this.NUMPOINTS;
     }
 
-    public double[] getPoints () {
+    public Point[] getPoints () {
         return this.POINTS;
     }
 
@@ -82,9 +82,9 @@ public class ABMInput {
      */
     public void fetchInput (Scanner io) {
         this.NUMPOINTS = io.nextInt();
-        this.POINTS = new double[this.NUMPOINTS];
+        this.POINTS = new Point[this.NUMPOINTS];
         for (int i = 0; i < this.NUMPOINTS; i++) {
-            this.POINTS[i] = io.nextDouble();
+            this.POINTS[i] = new Point(io.nextDouble(), io.nextDouble());
         }
 
         // We need to fetch each individual LIC parameters
@@ -107,6 +107,8 @@ public class ABMInput {
         double length2 = io.nextDouble();
         double radius2 = io.nextDouble();
         double area2 = io.nextDouble();
+
+        // Could be changed to using a Builder class
         this.PARAMETERS = new LICParameters(length1, radius1, epsilon, 
             area1, qPoints, quads, dist, nPoints, kPoints, aPoints, 
             bPoints, cPoints, dPoints, ePoints, fPoints, gPoints, 

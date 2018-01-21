@@ -50,7 +50,7 @@ public class ABMSystem {
      * @return  whether or not the ABM should be fired. Returns true to fire and false 
      *                  to not fire.
      */
-    private boolean decide (LICParameters params) {
+    private boolean decide (ABMInput input) {
         return false;
     }
 }

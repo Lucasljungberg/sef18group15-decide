@@ -1,24 +1,26 @@
 public class LICParameters {
-    final private double length1;      // Length in LICs 0, 7, 12
-    final private double radius1;      // Radius in LICs 1, 8, 13
-    final private double epsilon;      // Deviations from PI in LICs 2, 9
-    final private double area1;        // Area in LICs 3, 10, 14
-    final private int qPoints;        // No. of consecutive points in LIC 4
-    final private int quads;           // No. of quadrants in LIC 4
-    final private double dist;         // Distance in LIC 6
-    final private int nPoints;        // No. of consecutive points in LIC 6
-    final private int kPoints;        // No. of int. points in LICs 7, 12
-    final private int aPoints;        // No. of int. points in LICs 8, 13
-    final private int bPoints;        // No. of int. points in LICs 8, 13
-    final private int cPoints;        // No. of int. points in LIC 9
-    final private int dPoints;        // No. of int. points in LIC 9
-    final private int ePoints;        // No. of int. points in LICs 10, 14
-    final private int fPoints;        // No. of int. points in LICs 10, 14
-    final private int gPoints;        // No. of int. points in LIC 11
-    final private double length2;      // Maximum length in LIC 12
-    final private double radius2;      // Maximum radius in LIC 13
-    final private double area2;        // Maximum area in LIC 14
+    final private double length1;       // Length in LICs 0, 7, 12
+    final private double radius1;       // Radius in LICs 1, 8, 13
+    final private double epsilon;       // Deviations from PI in LICs 2, 9
+    final private double area1;         // Area in LICs 3, 10, 14
+    final private int qPoints;          // No. of consecutive points in LIC 4
+    final private int quads;            // No. of quadrants in LIC 4
+    final private double dist;          // Distance in LIC 6
+    final private int nPoints;          // No. of consecutive points in LIC 6
+    final private int kPoints;          // No. of int. points in LICs 7, 12
+    final private int aPoints;          // No. of int. points in LICs 8, 13
+    final private int bPoints;          // No. of int. points in LICs 8, 13
+    final private int cPoints;          // No. of int. points in LIC 9
+    final private int dPoints;          // No. of int. points in LIC 9
+    final private int ePoints;          // No. of int. points in LICs 10, 14
+    final private int fPoints;          // No. of int. points in LICs 10, 14
+    final private int gPoints;          // No. of int. points in LIC 11
+    final private double length2;       // Maximum length in LIC 12
+    final private double radius2;       // Maximum radius in LIC 13
+    final private double area2;         // Maximum area in LIC 14
 
+
+    // Could be changed to using a Builder-class
     public LICParameters (double length1, double radius1, double epsilon, double area1,
         int qPoints, int quads, double dist, int nPoints, int kPoints, int aPoints,
         int bPoints, int cPoints, int dPoints, int ePoints, int fPoints, int gPoints,
