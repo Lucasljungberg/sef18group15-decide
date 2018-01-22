@@ -42,6 +42,234 @@ public class ABMSystem {
         System.out.println(input);
     }
 
+    
+    /** check if the LIC0 holds
+     * @return true if the LIC holds, false otherwise
+     */
+    public boolean checkLIC0 () {
+        // holds = return result
+        boolean holds = true;
+        
+        // body-start
+        
+        // -- add here -- Use input.NUMPOINTS, input.length1, etc. 
+        
+        // body-end
+        
+        return holds;
+    }
+    /** check if the LIC1 holds
+     * @return true if the LIC holds, false otherwise
+     */
+    public boolean checkLIC1 () {
+        // holds = return result
+        boolean holds = true;
+        
+        // body-start
+        
+        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        
+        // body-end
+        
+        return holds;
+    }
+    /** check if the LIC2 holds
+     * @return true if the LIC holds, false otherwise
+     */
+    public boolean checkLIC2 () {
+        // holds = return result
+        boolean holds = true;
+        
+        // body-start
+        
+        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        
+        // body-end
+        
+        return holds;
+    }
+    /** check if the LIC3 holds
+     * @return true if the LIC holds, false otherwise
+     */
+    public boolean checkLIC3 () {
+        // holds = return result
+        boolean holds = true;
+        
+        // body-start
+        
+        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        
+        // body-end
+        
+        return holds;
+    }
+    /** check if the LIC4 holds
+     * @return true if the LIC holds, false otherwise
+     */
+    public boolean checkLIC4 () {
+        // holds = return result
+        boolean holds = true;
+        
+        // body-start
+        
+        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        
+        // body-end
+        
+        return holds;
+    }
+    /** check if the LIC5 holds
+     * @return true if the LIC holds, false otherwise
+     */
+    public boolean checkLIC5 () {
+        // holds = return result
+        boolean holds = true;
+        
+        // body-start
+        
+        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        
+        // body-end
+        
+        return holds;
+    }
+    /** check if the LIC6 holds
+     * @return true if the LIC holds, false otherwise
+     */
+    public boolean checkLIC6 () {
+        // holds = return result
+        boolean holds = true;
+        
+        // body-start
+        
+        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        
+        // body-end
+        
+        return holds;
+    }
+    /** check if the LIC7 holds
+     * @return true if the LIC holds, false otherwise
+     */
+    public boolean checkLIC7 () {
+        // holds = return result
+        boolean holds = true;
+        
+        // body-start
+        
+        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        
+        // body-end
+        
+        return holds;
+    }
+    /** check if the LIC8 holds
+     * @return true if the LIC holds, false otherwise
+     */
+    public boolean checkLIC8 () {
+        // holds = return result
+        boolean holds = true;
+        
+        // body-start
+        
+        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        
+        // body-end
+        
+        return holds;
+    }
+    /** check if the LIC9 holds
+     * @return true if the LIC holds, false otherwise
+     */
+    public boolean checkLIC9 () {
+        // holds = return result
+        boolean holds = true;
+        
+        // body-start
+        
+        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        
+        // body-end
+        
+        return holds;
+    }
+    /** check if the LIC10 holds
+     * @return true if the LIC holds, false otherwise
+     */
+    public boolean checkLIC10 () {
+        // holds = return result
+        boolean holds = true;
+        
+        // body-start
+        
+        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        
+        // body-end
+        
+        return holds;
+    }
+    /** check if the LIC11 holds
+     * @return true if the LIC holds, false otherwise
+     */
+    public boolean checkLIC11 () {
+        // holds = return result
+        boolean holds = true;
+        
+        // body-start
+        
+        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        
+        // body-end
+        
+        return holds;
+    }
+    /** check if the LIC12 holds
+     * @return true if the LIC holds, false otherwise
+     */
+    public boolean checkLIC12 () {
+        // holds = return result
+        boolean holds = true;
+        
+        // body-start
+        
+        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        
+        // body-end
+        
+        return holds;
+    }
+    /** check if the LIC13 holds
+     * @return true if the LIC holds, false otherwise
+     */
+    public boolean checkLIC13 () {
+        // holds = return result
+        boolean holds = true;
+        
+        // body-start
+        
+        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        
+        // body-end
+        
+        return holds;
+    }
+    /** check if the LIC14 holds
+     * @return true if the LIC holds, false otherwise
+     */
+    public boolean checkLIC14 () {
+        // holds = return result
+        boolean holds = true;
+        
+        // body-start
+        
+        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        
+        // body-end
+        
+        return holds;
+    }
+    
+    
     /**
      * Function to be implemented
      * 
