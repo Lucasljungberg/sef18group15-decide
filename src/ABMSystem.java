@@ -201,13 +201,55 @@ public class ABMSystem {
     /** check if the LIC6 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC6 () {
+    public boolean checkLIC6 (ABMInput input) {
+        ArrayList<Point> points = new ArrayList<Point>();
+        for (int i = 0; i < input.NUMPOINTS; i++) {
+            points.add(input.POINTS[i]);
+        }
+        Point endPoint1;
+        Point endPoint2;
+        // equation of a line connecting the 1st and the last point in a sequnce of N_PTS points: ax + by + c = 0
+        double a;
+        double b;
+        double c;
+        double distance;
+        
         // holds = return result
-        boolean holds = true;
+        boolean holds = false;
         
         // body-start
-        
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        // N_PTS < 3
+        if (input.PARAMETERS.getNPoints() < 3) {
+            return false;
+        }
+        for (int i = 0; i < input.NUMPOINTS - input.PARAMETERS.getNPoints(); i++) {
+            endPoint1 = points.get(i);
+            endPoint2 = points.get(i + input.PARAMETERS.getNPoints() - 1);
+            // if endPoint1 != endPoint2
+            if (endPoint2.getY() != endPoint1.getY() || endPoint2.getX() != endPoint1.getX()) {
+                // equation of a line connecting endPoint1 and endPoint2
+                c = 1;
+                a = (endPoint2.getY() - endPoint1.getY()) / (endPoint1.getY() * endPoint2.getX() - endPoint2.getY() * endPoint1.getX());
+                b = (endPoint1.getX() - endPoint2.getX()) / (endPoint1.getY() * endPoint2.getX() - endPoint2.getY() * endPoint1.getX());
+                // for each point in the sequence check if the distance to the line ax + by + c = 0 is greater than DIST
+                for (int j = 0; j < input.PARAMETERS.getNPoints(); j++) {
+                    distance = Math.abs(a * points.get(i + j).getX() + b * points.get(i + j).getY() + c) / Math.sqrt(a * a + b * b);
+                    if (distance > input.PARAMETERS.getDist()) {
+                        holds = true;
+                    }
+                }
+            // endPoint1 == endPoint2
+            } else {
+                // for each point in the sequence check if the distance from it to the point endPoint1 is greater than DIST
+                for (int j = 0; j < input.PARAMETERS.getNPoints(); j++) {
+                    distance = endPoint1.distanceTo(points.get(i + j));
+                    if (distance > input.PARAMETERS.getDist()) {
+                        holds = true;
+                    }
+                }
+            }
+            
+        }
         
         // body-end
         
