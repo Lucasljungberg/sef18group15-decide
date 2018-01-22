@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class LICTest {
     public static void main(String[] args) {
         LICTest test = new LICTest();
-        test.testLIC11();
+        test.testLIC14();
     }
     
     public void testLIC0() {
@@ -340,18 +340,59 @@ public class LICTest {
     }
     
     public void testLIC14() {
-        // contract: correctly check if the LIC1 is met.
+        // contract: correctly check if the LIC14 is met.
         
-        // initialization. next four variables should be custom initialized
-        int NUMPOINTS = 0;
-        Point[] POINTS;
-        LICParameters PARAMETERS;
-        boolean met = false;
-        
-        // body
-        
-        // assertion.
+        // Check initial condition of NUMPOINTS < 5 which should fail
+        ABMInput input = new ABMInput();
+        input.NUMPOINTS = 3;
+        input.POINTS = new Point[] { new Point(1, 3), new Point(3, 1), new Point(1, 1) };
+        int epts = 1, fpts = 1;
+        double area1 = 2.0, area2 = 4.0;
+        input.PARAMETERS = new LICParameters(3, 3, 1, area1, 3, 1, 3, 2, 2, 2, 2, 2, 2, epts, fpts, 1, 3, 3, area2);
+        ABMSystem system = new ABMSystem(input);
+
+        System.out.print("Testing LIC14 (test 1)...");
+        boolean met = system.checkLIC14(input);
+        assert false == met : "Failed test for LIC 14. Got " + met + " but expected false";
+        System.out.println("OK!");
+
+        // Check a successful case where both are succeeded at once
+        input.NUMPOINTS = 6;
+        input.POINTS = new Point[] { 
+            new Point(0, 0), 
+            new Point(0, 0), 
+            new Point(2, 0),
+            new Point(0, 0),
+            new Point(0, 1.5),
+            new Point(0, 0)
+        };
+        epts = 1; fpts = 1;
+        area1 = 2.0; area2 = 4.0;
+        input.PARAMETERS = new LICParameters(3, 3, 1, area1, 3, 1, 3, 2, 2, 2, 2, 2, 2, epts, fpts, 1, 3, 3, area2);
+
+        System.out.print("Testing LIC14 (test 2)...");
+        met = system.checkLIC14(input);
         assert true == met : "Failed test for LIC 14. Got " + met + " but expected true";
+        System.out.println("OK!");
+
+        // Check a failed case where only one part succeeds
+        input.NUMPOINTS = 6;
+        input.POINTS = new Point[] { 
+            new Point(0, 0), 
+            new Point(0, 0), 
+            new Point(2, 0),
+            new Point(2, 0),
+            new Point(0, 3),
+            new Point(0, 3)
+        };
+        epts = 1; fpts = 1;
+        area1 = 2.0; area2 = 4.0;
+        input.PARAMETERS = new LICParameters(3, 3, 1, area1, 3, 1, 3, 2, 2, 2, 2, 2, 2, epts, fpts, 1, 3, 3, area2);
+
+        System.out.print("Testing LIC14 (test 2)...");
+        met = system.checkLIC14(input);
+        assert false == met : "Failed test for LIC 14. Got " + met + " but expected false";
+        System.out.println("OK!");
     }
 }
 
