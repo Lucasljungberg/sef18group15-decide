@@ -408,7 +408,6 @@ public class ABMSystem {
 
             end++; i++;
         }
-        if (gtArea1 && ltArea2) return true;
         return false;
     }
     
