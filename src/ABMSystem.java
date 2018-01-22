@@ -48,14 +48,21 @@ public class ABMSystem {
     /** check if the LIC0 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC0 () {
+    public boolean checkLIC0 (ABMInput input) {
         // holds = return result
-        boolean holds = true;
+        boolean holds = false;
         
         // body-start
-        
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc. 
-        
+        ArrayList<Point> points = new ArrayList<Point>();
+        for (int i = 0; i < input.NUMPOINTS; i++) {
+            points.add(input.POINTS[i]);
+        }
+        double length1 = input.PARAMETERS.getLength1();
+        for (int i = 0; i < points.size() - 1; i++) {
+            if (points.get(i).distanceTo(points.get(i+1)) > length1) {
+                holds = true;
+            }
+        }
         // body-end
         
         return holds;
