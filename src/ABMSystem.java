@@ -374,17 +374,41 @@ public class ABMSystem {
     /** check if the LIC14 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC14 () {
-        // holds = return result
-        boolean holds = true;
-        
-        // body-start
-        
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
-        
-        // body-end
-        
-        return holds;
+    public boolean checkLIC14 (ABMInput input) {
+        if (input.NUMPOINTS < 5) return false;
+        double area1 = input.PARAMETERS.getArea1();
+        double area2 = input.PARAMETERS.getArea2();
+        boolean gtArea1 = false;
+        boolean ltArea2 = false;
+        int epts = input.PARAMETERS.getEPoints();
+        int fpts = input.PARAMETERS.getFPoints();
+        int i = 0;
+        int end = epts + 1 + fpts + 1;
+        Point p1, p2, p3;
+        double side1, side2, side3, area, s;
+        while (end < input.NUMPOINTS) {
+            p1 = input.POINTS[i];
+            p2 = input.POINTS[i + epts + 1];
+            p3 = input.POINTS[i + epts + 1 + fpts + 1];
+
+            // Get lengths of sides
+            side1 = p1.distanceTo(p2);
+            side2 = p1.distanceTo(p3);
+            side3 = p2.distanceTo(p3);
+
+            // Calculate semi-perimiter
+            s = (side1 + side2 + side3) / 2;
+
+            // Get area using Heron's Formula
+            area = Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
+            if (area > area1) gtArea1 = true;
+            if (area < area2) ltArea2 = true;
+
+            if (gtArea1 && ltArea2) return true;
+
+            end++; i++;
+        }
+        return false;
     }
     
     
