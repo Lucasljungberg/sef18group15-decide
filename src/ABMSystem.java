@@ -36,7 +36,7 @@ public class ABMSystem {
      */
     private ABMInput input;
 
-
+    
     public ABMSystem (ABMInput input) {
         this.input = input;
         System.out.println(input);
@@ -50,7 +50,10 @@ public class ABMSystem {
      * @return  whether or not the ABM should be fired. Returns true to fire and false 
      *                  to not fire.
      */
+    
     private boolean decide (ABMInput input) {
         return false;
     }
+    
+    
 }
