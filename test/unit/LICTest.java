@@ -1,1 +1,227 @@
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class LICTest {
+
+    public void testLIC0() {
+        // contract: correctly check if the LIC1 is met.
+        
+        // initialization. next four variables should be custom initialized
+        int NUMPOINTS = 0;
+        Point[] POINTS;
+        LICParameters PARAMETERS;
+        boolean met = false;
+        
+        // body
+        
+        // assertion.
+        assert true == met : "Failed test for LIC 0. Got " + met + " but expected true";
+    }
+    
+    public void testLIC1() {
+        // contract: correctly check if the LIC1 is met.
+        
+        // initialization. next four variables should be custom initialized
+        int NUMPOINTS = 0;
+        Point[] POINTS;
+        LICParameters PARAMETERS;
+        boolean met = false;
+        
+        // body
+        
+        // assertion.
+        assert true == met : "Failed test for LIC 1. Got " + met + " but expected true";
+    }
+    
+    public void testLIC2() {
+        // contract: correctly check if the LIC1 is met.
+        
+        // initialization. next four variables should be custom initialized
+        int NUMPOINTS = 0;
+        Point[] POINTS;
+        LICParameters PARAMETERS;
+        boolean met = false;
+        
+        // body
+        
+        // assertion.
+        assert true == met : "Failed test for LIC 2. Got " + met + " but expected true";
+    }
+    public void testLIC3() {
+        // contract: correctly check if the LIC1 is met.
+        
+        // initialization. next four variables should be custom initialized
+        int NUMPOINTS = 0;
+        Point[] POINTS;
+        LICParameters PARAMETERS;
+        boolean met = false;
+        
+        // body
+        
+        // assertion.
+        assert true == met : "Failed test for LIC 3. Got " + met + " but expected true";
+    }
+    
+    public void testLIC4() {
+        // contract: correctly check if the LIC1 is met.
+        
+        // initialization. next four variables should be custom initialized
+        int NUMPOINTS = 0;
+        Point[] POINTS;
+        LICParameters PARAMETERS;
+        boolean met = false;
+        
+        // body
+        
+        // assertion.
+        assert true == met : "Failed test for LIC 4. Got " + met + " but expected true";
+    }
+    
+    public void testLIC5() {
+        // contract: correctly check if the LIC1 is met.
+        
+        // initialization. next four variables should be custom initialized
+        int NUMPOINTS = 0;
+        Point[] POINTS;
+        LICParameters PARAMETERS;
+        boolean met = false;
+        
+        // body
+        
+        // assertion.
+        assert true == met : "Failed test for LIC 5. Got " + met + " but expected true";
+    }
+    public void testLIC6() {
+        // contract: correctly check if the LIC1 is met.
+        
+        // initialization. next four variables should be custom initialized
+        int NUMPOINTS = 0;
+        Point[] POINTS;
+        LICParameters PARAMETERS;
+        boolean met = false;
+        
+        // body
+        
+        // assertion.
+        assert true == met : "Failed test for LIC 6. Got " + met + " but expected true";
+    }
+    
+    public void testLIC7() {
+        // contract: correctly check if the LIC1 is met.
+        
+        // initialization. next four variables should be custom initialized
+        int NUMPOINTS = 0;
+        Point[] POINTS;
+        LICParameters PARAMETERS;
+        boolean met = false;
+        
+        // body
+        
+        // assertion.
+        assert true == met : "Failed test for LIC 7. Got " + met + " but expected true";
+    }
+    
+    public void testLIC8() {
+        // contract: correctly check if the LIC1 is met.
+        
+        // initialization. next four variables should be custom initialized
+        int NUMPOINTS = 0;
+        Point[] POINTS;
+        LICParameters PARAMETERS;
+        boolean met = false;
+        
+        // body
+        
+        // assertion.
+        assert true == met : "Failed test for LIC 8. Got " + met + " but expected true";
+    }
+    public void testLIC9() {
+        // contract: correctly check if the LIC1 is met.
+        
+        // initialization. next four variables should be custom initialized
+        int NUMPOINTS = 0;
+        Point[] POINTS;
+        LICParameters PARAMETERS;
+        boolean met = false;
+        
+        // body
+        
+        // assertion.
+        assert true == met : "Failed test for LIC 9. Got " + met + " but expected true";
+    }
+    
+    public void testLIC10() {
+        // contract: correctly check if the LIC1 is met.
+        
+        // initialization. next four variables should be custom initialized
+        int NUMPOINTS = 0;
+        Point[] POINTS;
+        LICParameters PARAMETERS;
+        boolean met = false;
+        
+        // body
+        
+        // assertion.
+        assert true == met : "Failed test for LIC 10. Got " + met + " but expected true";
+    }
+    
+    public void testLIC11() {
+        // contract: correctly check if the LIC1 is met.
+        
+        // initialization. next four variables should be custom initialized
+        int NUMPOINTS = 0;
+        Point[] POINTS;
+        LICParameters PARAMETERS;
+        boolean met = false;
+        
+        // body
+        
+        // assertion.
+        assert true == met : "Failed test for LIC 11. Got " + met + " but expected true";
+    }
+    public void testLIC12() {
+        // contract: correctly check if the LIC1 is met.
+        
+        // initialization. next four variables should be custom initialized
+        int NUMPOINTS = 0;
+        Point[] POINTS;
+        LICParameters PARAMETERS;
+        boolean met = false;
+        
+        // body
+        
+        // assertion.
+        assert true == met : "Failed test for LIC 12. Got " + met + " but expected true";
+    }
+    
+    public void testLIC13() {
+        // contract: correctly check if the LIC1 is met.
+        
+        // initialization. next four variables should be custom initialized
+        int NUMPOINTS = 0;
+        Point[] POINTS;
+        LICParameters PARAMETERS;
+        boolean met = false;
+        
+        // body
+        
+        // assertion.
+        assert true == met : "Failed test for LIC 13. Got " + met + " but expected true";
+    }
+    
+    public void testLIC14() {
+        // contract: correctly check if the LIC1 is met.
+        
+        // initialization. next four variables should be custom initialized
+        int NUMPOINTS = 0;
+        Point[] POINTS;
+        LICParameters PARAMETERS;
+        boolean met = false;
+        
+        // body
+        
+        // assertion.
+        assert true == met : "Failed test for LIC 14. Got " + met + " but expected true";
+    }
+}
 
