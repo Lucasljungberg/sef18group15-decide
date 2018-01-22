@@ -276,17 +276,19 @@ public class ABMSystem {
     /** check if the LIC11 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC11 () {
-        // holds = return result
-        boolean holds = true;
-        
-        // body-start
-        
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
-        
-        // body-end
-        
-        return holds;
+    public boolean checkLIC11 (ABMInput input) {
+        if (input.NUMPOINTS < 3) return false;
+        int gpts = input.PARAMETERS.getGPoints();
+
+        int i = 0, end = gpts + 1;
+        while (end < input.NUMPOINTS) {
+            if (input.POINTS[i + gpts + 1].getX() - input.POINTS[i].getX() < 0) {
+                return true;
+            }
+            i++;
+            end++;
+        }
+        return false;
     }
     /** check if the LIC12 holds
      * @return true if the LIC holds, false otherwise
