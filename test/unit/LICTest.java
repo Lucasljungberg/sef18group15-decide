@@ -79,7 +79,7 @@ public class LICTest {
         
         
         // assertion.
-        assert false == met : "Failed test for LIC 3. Got " + met + " but expected true";
+        assert false == met : "Failed test for LIC 3. Got " + met + " but expected false";
         System.out.println("OK!");
     }
     
