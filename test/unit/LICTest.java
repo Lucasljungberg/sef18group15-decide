@@ -6,6 +6,7 @@ public class LICTest {
         LICTest test = new LICTest();
         test.testLIC0();
     }
+    
     public void testLIC0() {
         // contract: correctly check if the LIC0 is met.
         // the test should return false if no two consecutive points are farther than 10 apart
@@ -102,18 +103,38 @@ public class LICTest {
     }
     
     public void testLIC5() {
-        // contract: correctly check if the LIC1 is met.
+        // contract: correctly check if the LIC5 is met.
+        // Point[2].x - Point[1].x = -1 < 0
+        // The test should return true
         
         // initialization. next four variables should be custom initialized
-        int NUMPOINTS = 0;
-        Point[] POINTS;
+        int NUMPOINTS = 4;
+        Point[] POINTS = { new Point(0, 0), new Point(1, 2), new Point(-1, -2), new Point(3, 3) };
         LICParameters PARAMETERS;
-        boolean met = false;
+        ABMInput input = new ABMInput();
+        input.NUMPOINTS = NUMPOINTS;
+        input.POINTS = POINTS;
+        ABMSystem system = new ABMSystem(input);
+
+        System.out.print("Testing LIC5 (test 1)...");
+        boolean met = system.checkLIC5(input);
         
         // body
         
         // assertion.
         assert true == met : "Failed test for LIC 5. Got " + met + " but expected true";
+        System.out.println("OK!");
+
+        // The second test should fail, because each new data point has an x value greater
+        // than the previous
+        POINTS = new Point[]{ new Point(0, 0), new Point(1, 2), new Point(1, 3), new Point(3, 3) };
+        input.POINTS = POINTS;
+
+        System.out.print("Testing LIC5 (test 2)...");
+        met = system.checkLIC5(input);
+
+        assert false == met : "Failed test for LIC 5. Got " + met + " but expected false";
+        System.out.println("OK!");
     }
     public void testLIC6() {
         // contract: correctly check if the LIC1 is met.

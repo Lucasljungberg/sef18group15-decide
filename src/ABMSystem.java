@@ -159,17 +159,22 @@ public class ABMSystem {
     /** check if the LIC5 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC5 () {
-        // holds = return result
-        boolean holds = true;
-        
+    public boolean checkLIC5 (ABMInput input) {
         // body-start
-        
+        Point p1 = null;
+        Point p2 = null;
+
         // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        for (int i = 1; i < input.NUMPOINTS; i++) {
+            p1 = input.POINTS[i-1];
+            p2 = input.POINTS[i];
+
+            if (p2.getX() - p1.getX() < 0) return true;
+        }
         
         // body-end
         
-        return holds;
+        return false;
     }
     /** check if the LIC6 holds
      * @return true if the LIC holds, false otherwise
