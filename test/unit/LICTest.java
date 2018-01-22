@@ -2,7 +2,6 @@ import java.util.Scanner;
 import java.util.Arrays;
 
 public class LICTest {
-
     public static void main(String[] args) {
         LICTest test = new LICTest();
         test.testLIC0();
@@ -49,17 +48,28 @@ public class LICTest {
     
     public void testLIC2() {
         // contract: correctly check if the LIC1 is met.
+        // The test should return a true, as the angle between the lines (POINTS[1], POINTS[2]) and
+        // (POINTS[2], POINTS[3]) is somewhere around 0.001
         
         // initialization. next four variables should be custom initialized
-        int NUMPOINTS = 0;
-        Point[] POINTS;
-        LICParameters PARAMETERS;
+        int NUMPOINTS = 3;
+        double epsilon = 1;
+        Point[] POINTS = { new Point(1,2), new Point(-1, -2.1), new Point(0, 0), new Point(-1, -2)};
+        LICParameters PARAMETERS = new LICParameters(3, 3, epsilon, 2, 3, 1, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2);
         boolean met = false;
+        ABMInput input = new ABMInput();
+        input.NUMPOINTS = NUMPOINTS;
+        input.POINTS = POINTS;
+        input.PARAMETERS = PARAMETERS;
+        ABMSystem system = new ABMSystem(input);
         
+        System.out.print("Testing LIC2... ");
         // body
+        met = system.checkLIC2(input);
         
         // assertion.
         assert true == met : "Failed test for LIC 2. Got " + met + " but expected true";
+        System.out.println("OK!");
     }
     public void testLIC3() {
         // contract: correctly check if the LIC1 is met.

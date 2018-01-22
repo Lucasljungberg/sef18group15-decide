@@ -42,7 +42,6 @@ public class ABMSystem {
     
     public ABMSystem (ABMInput input) {
         this.input = input;
-        //System.out.println(input);
     }
 
     
@@ -83,20 +82,49 @@ public class ABMSystem {
         
         return holds;
     }
-    /** check if the LIC2 holds
+
+    /** 
+     * check if the LIC2 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC2 () {
-        // holds = return result
-        boolean holds = true;
-        
-        // body-start
-        
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
-        
-        // body-end
-        
-        return holds;
+    public boolean checkLIC2 (ABMInput input) {
+        ArrayList<Point> points = new ArrayList<Point>();
+        for (int i = 0; i < input.NUMPOINTS; i++) {
+            points.add(input.POINTS[i]);
+        }
+
+        // Define origin 
+        Point orig = new Point(0,0);
+
+        // Fetch the two starting points so that the loop starts by fetching the third.
+        // Point p2 is always the vertex.
+        Point p1 = null;
+        Point p2 = points.remove(0);
+        Point p3 = points.remove(0);
+
+        for (Point p: points) {
+            // Prepare next iteration by moving the points one step forward in the input
+            p1 = p2;
+            p2 = p3;
+            p3 = p;
+
+            // Lengths of the legs of the "triangle" formed by the three points
+            double length1 = p2.distanceTo(p1);
+            double length2 = p2.distanceTo(p3);
+            double length3 = p1.distanceTo(p3);
+
+            // Using the Law of Cosines with p2 as c
+            double angle = Math.acos(
+                    (Math.pow(length1, 2) + Math.pow(length2, 2) - Math.pow(length3, 2)) / 
+                    (2 * length1 * length2)
+                );
+            
+            if (angle < (Math.PI - input.PARAMETERS.getEpsilon()) || 
+                angle > (Math.PI + input.PARAMETERS.getEpsilon())) return true;
+
+        }
+    
+        return false;
     }
     /** check if the LIC3 holds
      * @return true if the LIC holds, false otherwise
