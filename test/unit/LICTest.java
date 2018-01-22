@@ -74,17 +74,28 @@ public class LICTest {
     }
     public void testLIC3() {
         // contract: correctly check if the LIC1 is met.
-        
-        // initialization. next four variables should be custom initialized
-        int NUMPOINTS = 0;
-        Point[] POINTS;
-        LICParameters PARAMETERS;
-        boolean met = false;
+        // The test should return a true if there is a triangle formed by some three consecutive points with an area > area1
         
         // body
+        int NUMPOINTS = 3;
+        double area1 = 1;
+        Point[] POINTS = { new Point(1,2), new Point(-1, -2.1), new Point(0, 0), new Point(-1, -2)};
+        LICParameters PARAMETERS = new LICParameters(3, 3, 1, area1, 3, 1, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2);
+        boolean met = true;
+        ABMInput input = new ABMInput();
+        input.NUMPOINTS = NUMPOINTS;
+        input.POINTS = POINTS;
+        input.PARAMETERS = PARAMETERS;
+        ABMSystem system = new ABMSystem(input);
+        
+        System.out.print("Testing LIC3... ");
+        
+        met = system.checkLIC3(input);
+        
         
         // assertion.
-        assert true == met : "Failed test for LIC 3. Got " + met + " but expected true";
+        assert false == met : "Failed test for LIC 3. Got " + met + " but expected false";
+        System.out.println("OK!");
     }
     
     public void testLIC4() {

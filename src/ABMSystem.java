@@ -129,13 +129,35 @@ public class ABMSystem {
     /** check if the LIC3 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC3 () {
+    public boolean checkLIC3 (ABMInput input) {
+        ArrayList<Point> points = new ArrayList<Point>();
+        for (int i = 0; i < input.NUMPOINTS; i++) {
+            points.add(input.POINTS[i]);
+        }
         // holds = return result
-        boolean holds = true;
+        boolean holds = false;
         
         // body-start
+        double area;
+        // half perimeter.
+        double p;
+        double side1;
+        double side2;
+        double side3;
         
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        double area1 = input.PARAMETERS.getArea1();
+        
+        for (int i = 0; i < points.size() - 2; i++) {
+            side1 = points.get(i).distanceTo(points.get(i+1));
+            side2 = points.get(i+1).distanceTo(points.get(i+2));
+            side3 = points.get(i+2).distanceTo(points.get(i));
+            p = (side1 + side2 + side3) / 2;
+            area = Math.sqrt(p * (p - side1) * (p - side2) * (p - side3));
+            if (area > area1) {
+                holds = true;
+            }
+            
+        }
         
         // body-end
         
