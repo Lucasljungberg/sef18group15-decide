@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class LICTest {
     public static void main(String[] args) {
         LICTest test = new LICTest();
-        test.testLIC8();
+        test.testLIC11();
     }
     
     public void testLIC0() {
@@ -274,16 +274,40 @@ public class LICTest {
     public void testLIC11() {
         // contract: correctly check if the LIC1 is met.
         
-        // initialization. next four variables should be custom initialized
-        int NUMPOINTS = 0;
-        Point[] POINTS;
-        LICParameters PARAMETERS;
-        boolean met = false;
+        // Test initial condition NUMPOINTS < 3 results in false
+        ABMInput input = new ABMInput();
+        input.NUMPOINTS = 2;
+        input.POINTS = new Point[] { new Point(1, 3), new Point(3, 1) };
+        int gpts = 1;
+        input.PARAMETERS = new LICParameters(3, 3, 1, 1, 3, 1, 3, 2, 2, 2, 2, 2, 2, 2, 2, gpts, 3, 3, 2);
+        ABMSystem system = new ABMSystem(input);
         
-        // body
-        
-        // assertion.
+        System.out.print("Testing LIC11 (test 1)...");
+        boolean met = system.checkLIC11(input);
+        assert false == met : "Failed test for LIC 11. Got " + met + " but expected false";
+        System.out.println("OK!");
+
+        // Test successful case
+        input.NUMPOINTS = 4;
+        input.POINTS = new Point[] { new Point(1, 3), new Point(3, 1), new Point(2, 3), new Point(0, 0) };
+        gpts = 1;
+        input.PARAMETERS = new LICParameters(3, 3, 1, 1, 3, 1, 3, 2, 2, 2, 2, 2, 2, 2, 2, gpts, 3, 3, 2);
+
+        System.out.print("Testing LIC11 (test 2)...");
+        met = system.checkLIC11(input);
         assert true == met : "Failed test for LIC 11. Got " + met + " but expected true";
+        System.out.println("OK!");
+
+        // Test failed case
+        input.NUMPOINTS = 4;
+        input.POINTS = new Point[] { new Point(0, 3), new Point(1, 1), new Point(2, 3), new Point(3, 0) };
+        gpts = 1;
+        input.PARAMETERS = new LICParameters(3, 3, 1, 1, 3, 1, 3, 2, 2, 2, 2, 2, 2, 2, 2, gpts, 3, 3, 2);
+
+        System.out.print("Testing LIC11 (test 3)...");
+        met = system.checkLIC11(input);
+        assert false == met : "Failed test for LIC 11. Got " + met + " but expected false";
+        System.out.println("OK!");
     }
     public void testLIC12() {
         // contract: correctly check if the LIC1 is met.
