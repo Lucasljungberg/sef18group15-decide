@@ -6,17 +6,17 @@ public class ABMInput {
     /**
      * Number of observed data-points
      */
-    private int NUMPOINTS;
+    public int NUMPOINTS;
 
     /**
      * The observed data-points
      */
-    private Point[] POINTS;
+    public Point[] POINTS;
 
     /** 
      * Holds parameters for the LIC calculations
      */
-    private LICParameters PARAMETERS;
+    public LICParameters PARAMETERS;
 
     /**
      * Logical connector signals to be used for the LCM (Logical Connector Matrix).
