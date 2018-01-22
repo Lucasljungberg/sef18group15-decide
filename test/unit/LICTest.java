@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class LICTest {
     public static void main(String[] args) {
         LICTest test = new LICTest();
-        test.testLIC0();
+        test.testLIC8();
     }
     public void testLIC0() {
         // contract: correctly check if the LIC0 is met.
@@ -148,16 +148,68 @@ public class LICTest {
     public void testLIC8() {
         // contract: correctly check if the LIC1 is met.
         
-        // initialization. next four variables should be custom initialized
-        int NUMPOINTS = 0;
-        Point[] POINTS;
-        LICParameters PARAMETERS;
-        boolean met = false;
-        
-        // body
-        
-        // assertion.
-        assert true == met : "Failed test for LIC 8. Got " + met + " but expected true";
+        // Checking case of the shorter legs forming < 90 degree angle and big enough circle
+        int NUMPOINTS = 6;
+        Point[] POINTS = { 
+            new Point(0, 0), 
+            new Point(0, 0), 
+            new Point(2, 3), 
+            new Point(0, 0), 
+            new Point(0, 0), 
+            new Point(4, 4)
+        };
+        int apts = 1, bpts = 2;
+        double radius = 3;
+        LICParameters PARAMETERS = new LICParameters(3, radius, 1, 2, 3, 1, 3, 2, 2, apts, bpts, 2, 2, 2, 2, 2, 3, 3, 2);
+        ABMInput input = new ABMInput();
+        input.NUMPOINTS = NUMPOINTS;
+        input.POINTS = POINTS;
+        input.PARAMETERS = PARAMETERS;
+        ABMSystem system = new ABMSystem(input);
+        boolean met = system.checkLIC8(input);
+
+        System.out.print("Testing LIC8 (test 1)...");
+        assert false == met : "Failed test for LIC 8. Got " + met + " but expected false";
+        System.out.println("OK!");
+
+        // Testing case when NUMPOINTS < 5
+        input.NUMPOINTS = 4;
+        input.POINTS = new Point[]{ 
+            new Point(1, 1), 
+            new Point(0, 0), 
+            new Point(2, 3), 
+            new Point(0, 0), 
+        };
+        apts = 1;
+        bpts = 1;
+        radius = 3;
+        PARAMETERS = new LICParameters(3, radius, 1, 2, 3, 1, 3, 2, 2, apts, bpts, 2, 2, 2, 2, 2, 3, 3, 2);
+        input.PARAMETERS = PARAMETERS;
+        met = system.checkLIC8(input);
+        System.out.print("Testing LIC8 (test 2)...");
+        assert false == met : "Failed test for LIC 8. Got " + met + " but expected false";
+        System.out.println("OK!");
+
+
+        // Testing case when the angle of the smaller legs > 90 degrees
+        input.NUMPOINTS = 6;
+        input.POINTS = new Point[]{ 
+            new Point(0, 0), 
+            new Point(0, 0), 
+            new Point(-1, 9), 
+            new Point(0, 0), 
+            new Point(0, 11)
+        };
+        apts = 1; 
+        bpts = 1;
+        radius = 8;
+        PARAMETERS = new LICParameters(3, radius, 1, 2, 3, 1, 3, 2, 2, apts, bpts, 2, 2, 2, 2, 2, 3, 3, 2);
+        input.PARAMETERS = PARAMETERS;
+        met = system.checkLIC8(input);
+        System.out.print("Testing LIC8 (test 3)...");
+        assert false == met : "Failed test for LIC 8. Got " + met + " but expected false";
+        System.out.println("OK!");
+
     }
     public void testLIC9() {
         // contract: correctly check if the LIC1 is met.
