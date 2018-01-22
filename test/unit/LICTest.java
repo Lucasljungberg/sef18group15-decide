@@ -3,19 +3,33 @@ import java.util.Arrays;
 
 public class LICTest {
 
+    public static void main(String[] args) {
+        LICTest test = new LICTest();
+        test.testLIC0();
+    }
     public void testLIC0() {
-        // contract: correctly check if the LIC1 is met.
+        // contract: correctly check if the LIC0 is met.
+        // the test should return false if no two consecutive points are farther than 10 apart
         
         // initialization. next four variables should be custom initialized
-        int NUMPOINTS = 0;
-        Point[] POINTS;
-        LICParameters PARAMETERS;
+        int NUMPOINTS = 3;
+        double length1 = 10;
+        Point[] POINTS = { new Point(1,2), new Point(-1, -2.1), new Point(0, 0), new Point(-1, -2)};
+        LICParameters PARAMETERS = new LICParameters(length1, 3, 2, 2, 3, 1, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2);
         boolean met = false;
+        ABMInput input = new ABMInput();
+        input.NUMPOINTS = NUMPOINTS;
+        input.POINTS = POINTS;
+        input.PARAMETERS = PARAMETERS;
+        ABMSystem system = new ABMSystem(input);
         
+        System.out.print("Testing LIC0... ");
         // body
+        met = system.checkLIC0(input);
         
         // assertion.
-        assert true == met : "Failed test for LIC 0. Got " + met + " but expected true";
+        assert false == met : "Failed test for LIC 0. Got " + met + " but expected false";
+        System.out.println("OK!");
     }
     
     public void testLIC1() {
@@ -149,9 +163,8 @@ public class LICTest {
         // assertion.
         assert true == met : "Failed test for LIC 9. Got " + met + " but expected true";
     }
-    
     public void testLIC10() {
-        // contract: correctly check if the LIC1 is met.
+        // contract: correctly check if the LIC10 is met.
         
         // initialization. next four variables should be custom initialized
         int NUMPOINTS = 0;
@@ -164,7 +177,6 @@ public class LICTest {
         // assertion.
         assert true == met : "Failed test for LIC 10. Got " + met + " but expected true";
     }
-    
     public void testLIC11() {
         // contract: correctly check if the LIC1 is met.
         
