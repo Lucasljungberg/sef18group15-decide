@@ -22,7 +22,7 @@ public class ABMInput {
      * Logical connector signals to be used for the LCM (Logical Connector Matrix).
      * toString methods exists for debugging purposes.
      */
-    public enum Connector {
+    public static enum Connector {
         NOTUSED { public String toString () { return "NOTUSED"; }},
         ANDD { public String toString () { return "ANDD" ; }},
         ORR { public String toString () { return "ORR"; }}
@@ -35,13 +35,13 @@ public class ABMInput {
      * the logical connectors to be used between pairs of LICs to determine the
      * corresponding entry in the PUM.
      */
-    private Connector[][] LCM;
+    public Connector[][] LCM;
 
     /**
      * Preliminary Unlocking Vector
      * Indicates which of the LICs should be considered for the decision.
      */
-    private boolean[] PUV;
+    public boolean[] PUV;
 
     public int getNumpoints () {
         return this.NUMPOINTS;
