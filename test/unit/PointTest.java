@@ -87,17 +87,17 @@ public class PointTest {
         Point p1 = new Point(1, 2);
         Point p2 = new Point(3, 4);
 
-        // The following test should be 1*2 + 3*4 = 2+12 = 14
+        // The following test should be 1*3 + 2*4 = 3+8 = 11
         System.out.print("Testing dotProduct (test 1)...");
-        assert 14 == p1.dotProduct(p2) : String.format(
+        assert 11 == p1.dotProduct(p2) : String.format(
             "Failed! Expected 14 but got %f",
             p1.dotProduct(p2));
         System.out.println("OK!");
 
-        // Check negative numbers. -1*2 + 3*4 = -2 + 12 = 10
+        // Check negative numbers. -1*3 + 2*4 = -3 + 8 = 5
         System.out.print("Testing dotProduct (test 2)...");
         p1 = new Point(-1, 2);
-        assert 10 == p1.dotProduct(p2) : String.format(
+        assert 5 == p1.dotProduct(p2) : String.format(
             "Failed! Expected 10 but got %f",
             p1.dotProduct(p2));
         System.out.println("OK!");
