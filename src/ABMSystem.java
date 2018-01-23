@@ -14,7 +14,7 @@ public class ABMSystem {
      * Each entry represents a LIC (Launch Interceptor Condition).
      * If index i is true, that means the conditions for LIC i has been met
      */
-    private boolean[] CMV = new boolean[15];
+    public boolean[] CMV = new boolean[15];
 
     /**
      * Preliminary Unlocking Matrix
@@ -27,17 +27,17 @@ public class ABMSystem {
      *     Else If LCM[i][j] == NOTUSED then
      *         PUM[i][j] = true
      */
-    private boolean[][] PUM = new boolean[15][15];
+    public boolean[][] PUM = new boolean[15][15];
 
     /**
      * Final Unlocking Vector
      */
-    private boolean[] FUV = new boolean[15];
+    public boolean[] FUV = new boolean[15];
 
     /**
      * Holds the input to the ABMSystem
      */
-    private ABMInput input;
+    public ABMInput input;
 
     
     public ABMSystem (ABMInput input) {
@@ -576,7 +576,7 @@ public class ABMSystem {
     /**
      * Computes the PUM based on the results of the CMV from the LIC-checks
      */
-    private void computePUM (ABMInput input) {
+    public void computePUM (ABMInput input) {
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 15; j++) {
                 switch (input.LCM[i][j]) {
@@ -597,7 +597,7 @@ public class ABMSystem {
     /**
      * Computes the FUV based on PUM and PUV 
      */
-    private void computeFUV (ABMInput input) {
+    public void computeFUV (ABMInput input) {
         for (int i = 0; i < 15; i++) {
             if (!input.PUV[i]) {
                 this.FUV[i] = true;
