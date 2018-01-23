@@ -255,21 +255,37 @@ public class ABMSystem {
         
         return holds;
     }
-    /** check if the LIC7 holds
+
+     /** check if the LIC7 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC7 () {
-        // holds = return result
-        boolean holds = true;
+    public boolean checkLIC7 (ABMInput input) {
+        if (input.NUMPOINTS < 3) return false;
+
+        int kpts = input.PARAMETERS.getKPoints();
         
-        // body-start
-        
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
-        
-        // body-end
-        
-        return holds;
+        Point p1;
+        Point p2;
+
+        int i = 0;
+        int end = kpts + 2;
+        while (end <= input.NUMPOINTS) {
+            p1 = input.POINTS[i];
+            p2 = input.POINTS[i + kpts + 1];
+
+            double distance = p1.distanceTo(p2);
+
+            if (distance > input.PARAMETERS.getLength1()) {
+            	return true;
+            }
+            i++;
+            end++;
+        }
+        // no pair of points far enough apart
+        return false;  
     }
+
+
     /** 
      * check if the LIC8 holds
      * @return true if the LIC holds, false otherwise
@@ -327,14 +343,14 @@ public class ABMSystem {
                 double minRadius = (a*b*c) / 
                     Math.sqrt((a+b+c)*(b+c-a)*(c+a-b)*(a+b-c));
 
-                if (minRadius > input.PARAMETERS.getRadius1()) return false;
+                if (minRadius > input.PARAMETERS.getRadius1()) return true;
             }
             i++;
             end++;
         }
 
         // All points fit inside a circle
-        return true;
+        return false;
     }
     /** check if the LIC9 holds
      * @return true if the LIC holds, false otherwise
@@ -354,32 +370,70 @@ public class ABMSystem {
     /** check if the LIC10 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC10 () {
-        // holds = return result
-        boolean holds = true;
+    public boolean checkLIC10 (ABMInput input) {
+    	if (input.NUMPOINTS < 5) return false;
+
+        double area1 = input.PARAMETERS.getArea1();
+
+        int epts = input.PARAMETERS.getEPoints();
+        int fpts = input.PARAMETERS.getFPoints();
         
-        // body-start
-        
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
-        
-        // body-end
-        
-        return holds;
+        Point p1;
+        Point p2;
+        Point p3;
+
+		double side1;
+        double side2;
+        double side3;
+
+        double area;
+
+        // half perimeter.
+        double p;
+
+        // finding and checking relevant combinations of points
+        int i = 0;
+        int end = epts + fpts + 3;
+        while (end <= input.NUMPOINTS) {
+            p1 = input.POINTS[i];
+            p2 = input.POINTS[i + epts + 1];
+            p3 = input.POINTS[i + epts + 1 + fpts + 1];
+
+            side1 = p1.distanceTo(p2);
+	        side2 = p2.distanceTo(p3);
+	        side3 = p3.distanceTo(p1);
+
+	        // calculate area using Heron's formula
+	        p = (side1 + side2 + side3) / 2;
+            area = Math.sqrt(p * (p - side1) * (p - side2) * (p - side3));
+
+            if (area > area1) {
+                return true;
+            }
+
+			i++;
+            end++;
+	    }
+	    // No area big enough
+	    return false;
     }
+
     /** check if the LIC11 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC11 () {
-        // holds = return result
-        boolean holds = true;
-        
-        // body-start
-        
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
-        
-        // body-end
-        
-        return holds;
+    public boolean checkLIC11 (ABMInput input) {
+        if (input.NUMPOINTS < 3) return false;
+        int gpts = input.PARAMETERS.getGPoints();
+
+        int i = 0, end = gpts + 1;
+        while (end < input.NUMPOINTS) {
+            if (input.POINTS[i + gpts + 1].getX() - input.POINTS[i].getX() < 0) {
+                return true;
+            }
+            i++;
+            end++;
+        }
+        return false;
     }
     /** check if the LIC12 holds
      * @return true if the LIC holds, false otherwise
@@ -414,17 +468,41 @@ public class ABMSystem {
     /** check if the LIC14 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC14 () {
-        // holds = return result
-        boolean holds = true;
-        
-        // body-start
-        
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
-        
-        // body-end
-        
-        return holds;
+    public boolean checkLIC14 (ABMInput input) {
+        if (input.NUMPOINTS < 5) return false;
+        double area1 = input.PARAMETERS.getArea1();
+        double area2 = input.PARAMETERS.getArea2();
+        boolean gtArea1 = false;
+        boolean ltArea2 = false;
+        int epts = input.PARAMETERS.getEPoints();
+        int fpts = input.PARAMETERS.getFPoints();
+        int i = 0;
+        int end = epts + 1 + fpts + 1;
+        Point p1, p2, p3;
+        double side1, side2, side3, area, s;
+        while (end < input.NUMPOINTS) {
+            p1 = input.POINTS[i];
+            p2 = input.POINTS[i + epts + 1];
+            p3 = input.POINTS[i + epts + 1 + fpts + 1];
+
+            // Get lengths of sides
+            side1 = p1.distanceTo(p2);
+            side2 = p1.distanceTo(p3);
+            side3 = p2.distanceTo(p3);
+
+            // Calculate semi-perimiter
+            s = (side1 + side2 + side3) / 2;
+
+            // Get area using Heron's Formula
+            area = Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
+            if (area > area1) gtArea1 = true;
+            if (area < area2) ltArea2 = true;
+
+            if (gtArea1 && ltArea2) return true;
+
+            end++; i++;
+        }
+        return false;
     }
     
     
