@@ -4,8 +4,8 @@ import java.util.Arrays;
 public class LICTest {
     public static void main(String[] args) {
         LICTest test = new LICTest();
-        test.testLIC10();
-        test.testLIC12();
+        test.testLIC8();
+        test.testLIC9();
     }
     
     public void testLIC0() {
@@ -49,7 +49,7 @@ public class LICTest {
     }
     
     public void testLIC2() {
-        // contract: correctly check if the LIC1 is met.
+        // contract: correctly check if the LIC2 is met.
         // The test should return a true, as the angle between the lines (POINTS[1], POINTS[2]) and
         // (POINTS[2], POINTS[3]) is somewhere around 0.001
         
@@ -87,7 +87,7 @@ public class LICTest {
 
     }
     public void testLIC3() {
-        // contract: correctly check if the LIC1 is met.
+        // contract: correctly check if the LIC3 is met.
         // The test should return a true if there is a triangle formed by some three consecutive points with an area > area1
         
         // body
@@ -113,7 +113,7 @@ public class LICTest {
     }
     
     public void testLIC4() {
-        // contract: correctly check if the LIC1 is met.
+        // contract: correctly check if the LIC4 is met.
         
         // initialization. next four variables should be custom initialized
         int NUMPOINTS = 0;
@@ -163,8 +163,7 @@ public class LICTest {
     }
     public void testLIC6() {
         // contract: correctly check if the LIC6 is met.
-        //
-        
+
         // body
         int NUMPOINTS = 5;
         int nPoints = 3;
@@ -215,7 +214,7 @@ public class LICTest {
     }
     
     public void testLIC8() {
-        // contract: correctly check if the LIC1 is met.
+        // contract: correctly check if the LIC8 is met.
         
         // Checking case of the shorter legs forming < 90 degree angle and big enough circle
         int NUMPOINTS = 6;
@@ -281,18 +280,31 @@ public class LICTest {
 
     }
     public void testLIC9() {
-        // contract: correctly check if the LIC1 is met.
+        // contract: correctly check if the LIC9 is met.
+        // The test should return a true, as the angle between the lines (POINTS[0], POINTS[2]) and
+        // (POINTS[2], POINTS[4]) is somewhere around 0.001
         
         // initialization. next four variables should be custom initialized
-        int NUMPOINTS = 0;
-        Point[] POINTS;
-        LICParameters PARAMETERS;
-        boolean met = false;
+        int NUMPOINTS = 5;
+        double epsilon = 1;
+        int C_PTS = 1;
+        int D_PTS = 1;
+        Point[] POINTS = { new Point(-1, -2.1), new Point(0, 0), new Point(1,2), new Point(-1, -2.1), new Point(-1, -2)};
+        LICParameters PARAMETERS = new LICParameters(3, 3, epsilon, 2, 3, 1, 3, 2, 2, 2, 2, C_PTS, D_PTS, 2, 2, 2, 3, 3, 2);
         
+        ABMInput input = new ABMInput();
+        input.NUMPOINTS = NUMPOINTS;
+        input.POINTS = POINTS;
+        input.PARAMETERS = PARAMETERS;
+        ABMSystem system = new ABMSystem(input);
+        
+        System.out.print("Testing LIC9... ");
         // body
+        boolean met = system.checkLIC9(input);
         
         // assertion.
         assert true == met : "Failed test for LIC 9. Got " + met + " but expected true";
+        System.out.println("OK!");
     }
     public void testLIC10() {
         // contract: correctly check if the LIC10 is met.
@@ -342,7 +354,7 @@ public class LICTest {
     }
 
     public void testLIC11() {
-        // contract: correctly check if the LIC1 is met.
+        // contract: correctly check if the LIC11 is met.
         
         // Test initial condition NUMPOINTS < 3 results in false
         ABMInput input = new ABMInput();
@@ -381,6 +393,7 @@ public class LICTest {
     }
     public void testLIC12() {
         // contract: correctly check if the LIC12 is met.
+
         // the test should return false if no two points separated by 2 points are farther than 3, or less than 10 apart
         
         // test 1
@@ -451,7 +464,7 @@ public class LICTest {
     }
     
     public void testLIC13() {
-        // contract: correctly check if the LIC1 is met.
+        // contract: correctly check if the LIC13 is met.
         
         // initialization. next four variables should be custom initialized
         int NUMPOINTS = 0;

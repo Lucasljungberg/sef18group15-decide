@@ -358,16 +358,57 @@ public class ABMSystem {
     /** check if the LIC9 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC9 () {
-        // holds = return result
-        boolean holds = true;
+    public boolean checkLIC9 (ABMInput input) {
+        ArrayList<Point> points = new ArrayList<Point>();
+        for (int i = 0; i < input.NUMPOINTS; i++) {
+            points.add(input.POINTS[i]);
+        }
         
-        // body-start
+        boolean holds = false;
+        // Fetch the two starting points so that the loop starts by fetching the third.
+        // Point p2 is always the vertex.
+        Point p1;
+        Point p2;
+        Point p3;
         
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
-        
-        // body-end
-        
+        // The condition is not met when NUMPOINTS < 5
+        if (input.NUMPOINTS < 5) {
+            System.out.println("NUMPOINTS < 5");
+            return false;
+        }
+        System.out.println("cPoints == " + input.PARAMETERS.getCPoints());
+        System.out.println("dPoints == " + input.PARAMETERS.getDPoints());
+        for (int i = 0; i < points.size() - input.PARAMETERS.getCPoints() - input.PARAMETERS.getDPoints() - 2; i++) {
+            // Prepare next iteration by moving the points one step forward in the input
+            
+            p1 = points.get(i);
+            p2 = points.get(i + input.PARAMETERS.getCPoints() + 1);
+            p3 = points.get(i + input.PARAMETERS.getCPoints() + 1 + input.PARAMETERS.getDPoints() + 1);
+            
+            // Lengths of the legs of the "triangle" formed by the three points
+            double length1 = p2.distanceTo(p1);
+            double length2 = p2.distanceTo(p3);
+            double length3 = p1.distanceTo(p3);
+            
+            // The condition is not met when p1 or p3 coincide wih p2
+            if ((length1 == 0) || (length2 == 0)) {
+                continue;
+            }
+            
+            // Using the Law of Cosines with p2 as c
+            double angle = Math.acos(
+                                     (Math.pow(length1, 2) + Math.pow(length2, 2) - Math.pow(length3, 2)) /
+                                     (2 * length1 * length2)
+                                     );
+            
+            if (angle < (Math.PI - input.PARAMETERS.getEpsilon()) ||
+                angle > (Math.PI + input.PARAMETERS.getEpsilon()))
+            {
+                return true;
+            }
+            
+        }
+        System.out.println("holds == false");
         return holds;
     }
     /** check if the LIC10 holds
