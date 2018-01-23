@@ -113,6 +113,9 @@ public class ABMSystem {
             double length2 = p2.distanceTo(p3);
             double length3 = p1.distanceTo(p3);
 
+            // Check if point 1 or 3 coincides with point 2
+            if ((length1 == 0) || (length2 == 0)) continue;
+
             // Using the Law of Cosines with p2 as c
             double angle = Math.acos(
                     (Math.pow(length1, 2) + Math.pow(length2, 2) - Math.pow(length3, 2)) / 
@@ -201,13 +204,55 @@ public class ABMSystem {
     /** check if the LIC6 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC6 () {
+    public boolean checkLIC6 (ABMInput input) {
+        ArrayList<Point> points = new ArrayList<Point>();
+        for (int i = 0; i < input.NUMPOINTS; i++) {
+            points.add(input.POINTS[i]);
+        }
+        Point endPoint1;
+        Point endPoint2;
+        // equation of a line connecting the 1st and the last point in a sequnce of N_PTS points: ax + by + c = 0
+        double a;
+        double b;
+        double c;
+        double distance;
+        
         // holds = return result
-        boolean holds = true;
+        boolean holds = false;
         
         // body-start
-        
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
+        // N_PTS < 3
+        if (input.PARAMETERS.getNPoints() < 3) {
+            return false;
+        }
+        for (int i = 0; i < input.NUMPOINTS - input.PARAMETERS.getNPoints(); i++) {
+            endPoint1 = points.get(i);
+            endPoint2 = points.get(i + input.PARAMETERS.getNPoints() - 1);
+            // if endPoint1 != endPoint2
+            if (endPoint2.getY() != endPoint1.getY() || endPoint2.getX() != endPoint1.getX()) {
+                // equation of a line connecting endPoint1 and endPoint2
+                c = 1;
+                a = (endPoint2.getY() - endPoint1.getY()) / (endPoint1.getY() * endPoint2.getX() - endPoint2.getY() * endPoint1.getX());
+                b = (endPoint1.getX() - endPoint2.getX()) / (endPoint1.getY() * endPoint2.getX() - endPoint2.getY() * endPoint1.getX());
+                // for each point in the sequence check if the distance to the line ax + by + c = 0 is greater than DIST
+                for (int j = 0; j < input.PARAMETERS.getNPoints(); j++) {
+                    distance = Math.abs(a * points.get(i + j).getX() + b * points.get(i + j).getY() + c) / Math.sqrt(a * a + b * b);
+                    if (distance > input.PARAMETERS.getDist()) {
+                        holds = true;
+                    }
+                }
+            // endPoint1 == endPoint2
+            } else {
+                // for each point in the sequence check if the distance from it to the point endPoint1 is greater than DIST
+                for (int j = 0; j < input.PARAMETERS.getNPoints(); j++) {
+                    distance = endPoint1.distanceTo(points.get(i + j));
+                    if (distance > input.PARAMETERS.getDist()) {
+                        holds = true;
+                    }
+                }
+            }
+            
+        }
         
         // body-end
         
@@ -369,18 +414,54 @@ public class ABMSystem {
     /** check if the LIC10 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC10 () {
-        // holds = return result
-        boolean holds = true;
+    public boolean checkLIC10 (ABMInput input) {
+    	if (input.NUMPOINTS < 5) return false;
+
+        double area1 = input.PARAMETERS.getArea1();
+
+        int epts = input.PARAMETERS.getEPoints();
+        int fpts = input.PARAMETERS.getFPoints();
         
-        // body-start
-        
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
-        
-        // body-end
-        
-        return holds;
+        Point p1;
+        Point p2;
+        Point p3;
+
+		double side1;
+        double side2;
+        double side3;
+
+        double area;
+
+        // half perimeter.
+        double p;
+
+        // finding and checking relevant combinations of points
+        int i = 0;
+        int end = epts + fpts + 3;
+        while (end <= input.NUMPOINTS) {
+            p1 = input.POINTS[i];
+            p2 = input.POINTS[i + epts + 1];
+            p3 = input.POINTS[i + epts + 1 + fpts + 1];
+
+            side1 = p1.distanceTo(p2);
+	        side2 = p2.distanceTo(p3);
+	        side3 = p3.distanceTo(p1);
+
+	        // calculate area using Heron's formula
+	        p = (side1 + side2 + side3) / 2;
+            area = Math.sqrt(p * (p - side1) * (p - side2) * (p - side3));
+
+            if (area > area1) {
+                return true;
+            }
+
+			i++;
+            end++;
+	    }
+	    // No area big enough
+	    return false;
     }
+
     /** check if the LIC11 holds
      * @return true if the LIC holds, false otherwise
      */
@@ -401,16 +482,39 @@ public class ABMSystem {
     /** check if the LIC12 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC12 () {
+    public boolean checkLIC12 (ABMInput input) {
+        // condition is not met if NUMPOINTS < 3
+        if (input.NUMPOINTS < 3) {
+            return false;
+        }
         // holds = return result
-        boolean holds = true;
+        boolean holds = false;
+        boolean holds1 = false;
+        boolean holds2 = false;
         
         // body-start
+        ArrayList<Point> points = new ArrayList<Point>();
+        for (int i = 0; i < input.NUMPOINTS; i++) {
+            points.add(input.POINTS[i]);
+        }
+        double length1 = input.PARAMETERS.getLength1();
+        double length2 = input.PARAMETERS.getLength2();
+        int kpts = input.PARAMETERS.getKPoints();
         
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
-        
+        for (int i = 0; i < points.size() - kpts - 1; i++) {
+            if (points.get(i).distanceTo(points.get(i+kpts+1)) > length1) {
+                System.out.println("more than " + length1 + " apart");
+                holds1 = true;
+            }
+            if (points.get(i).distanceTo(points.get(i+kpts+1)) < length2) {
+                System.out.println("less than " + length2 + " apart");
+                holds2 = true;
+            }
+        }
         // body-end
-        
+        if (holds1 == true && holds2 == true) {
+            holds = true;
+        }
         return holds;
     }
     /** check if the LIC13 holds
@@ -467,6 +571,44 @@ public class ABMSystem {
         }
         return false;
     }
+
+
+    /**
+     * Computes the PUM based on the results of the CMV from the LIC-checks
+     */
+    private void computePUM (ABMInput input) {
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                switch (input.LCM[i][j]) {
+                    case ANDD:
+                        this.PUM[i][j] = (this.CMV[i] && this.CMV[j]);
+                        break;
+                    case ORR:
+                        this.PUM[i][j] = (this.CMV[i] || this.CMV[j]);
+                        break;
+                    case NOTUSED:
+                        this.PUM[i][j] = true;
+                        break;
+                }
+            }
+        }
+    }
+
+    /**
+     * Computes the FUV based on PUM and PUV 
+     */
+    private void computeFUV (ABMInput input) {
+        for (int i = 0; i < 15; i++) {
+            if (!input.PUV[i]) {
+                this.FUV[i] = true;
+            } else {
+                for (int j = 0; j < 15; j++) {
+                    if (!this.PUM[i][j]) break;
+                }
+            }
+
+        }
+    }
     
     
     /**
@@ -477,9 +619,16 @@ public class ABMSystem {
      * @return  whether or not the ABM should be fired. Returns true to fire and false 
      *                  to not fire.
      */
-    
     private boolean decide (ABMInput input) {
-        return false;
+        
+        // Check the FUV. Return true afterwards iff no entries in the
+        // FUV is false
+        for (int i = 0; i < 15; i++) {
+            if (!this.FUV[i]) {
+                return false;
+            }
+        }
+        return true;
     }
     
     
