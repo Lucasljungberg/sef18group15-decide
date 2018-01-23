@@ -64,13 +64,26 @@ public class LICTest {
         input.PARAMETERS = PARAMETERS;
         ABMSystem system = new ABMSystem(input);
         
-        System.out.print("Testing LIC2... ");
+        System.out.print("Testing LIC2 (test 1)... ");
         // body
         met = system.checkLIC2(input);
         
         // assertion.
         assert true == met : "Failed test for LIC 2. Got " + met + " but expected true";
         System.out.println("OK!");
+
+        
+        // Test that coinciding points are not considered. Because only 3
+        // points are present, and p1 coinsides with p2, this should return false
+        input.NUMPOINTS = 3;
+        input.POINTS = new Point[] { new Point(1, 1), new Point(1, 1), new Point(-3, -2.5) };
+        System.out.print("Testing LIC2 (test 2)...");
+        met = system.checkLIC2(input);
+        assert false == met : "Failed test for LIC 2. Got " + met + " but expected false";
+        System.out.println("OK!");
+        
+        
+
     }
     public void testLIC3() {
         // contract: correctly check if the LIC1 is met.
