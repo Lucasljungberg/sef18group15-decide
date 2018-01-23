@@ -504,6 +504,44 @@ public class ABMSystem {
         }
         return false;
     }
+
+
+    /**
+     * Computes the PUM based on the results of the CMV from the LIC-checks
+     */
+    private void computePUM (ABMInput input) {
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                switch (input.LCM[i][j]) {
+                    case ANDD:
+                        this.PUM[i][j] = (this.CMV[i] && this.CMV[j]);
+                        break;
+                    case ORR:
+                        this.PUM[i][j] = (this.CMV[i] || this.CMV[j]);
+                        break;
+                    case NOTUSED:
+                        this.PUM[i][j] = true;
+                        break;
+                }
+            }
+        }
+    }
+
+    /**
+     * Computes the FUV based on PUM and PUV 
+     */
+    private void computeFUV (ABMInput input) {
+        for (int i = 0; i < 15; i++) {
+            if (!input.PUV[i]) {
+                this.FUV[i] = true;
+            } else {
+                for (int j = 0; j < 15; j++) {
+                    if (!this.PUM[i][j]) break;
+                }
+            }
+
+        }
+    }
     
     
     /**
@@ -514,9 +552,16 @@ public class ABMSystem {
      * @return  whether or not the ABM should be fired. Returns true to fire and false 
      *                  to not fire.
      */
-    
     private boolean decide (ABMInput input) {
-        return false;
+        
+        // Check the FUV. Return true afterwards iff no entries in the
+        // FUV is false
+        for (int i = 0; i < 15; i++) {
+            if (!this.FUV[i]) {
+                return false;
+            }
+        }
+        return true;
     }
     
     
