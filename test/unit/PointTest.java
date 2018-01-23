@@ -2,6 +2,12 @@ public class PointTest {
     
     public static void main (String[] args) {
         PointTest test = new PointTest(); 
+        test.testGetX();
+        test.testGetY();
+        test.testQuadrant();
+        test.testDistanceTo();
+        test.testDotProduct();
+        test.testMinus();
     }
 
     private void testGetX() {
@@ -9,9 +15,11 @@ public class PointTest {
         // The returned x-component should be 13.2
         Point p = new Point(13.2, 0); 
 
+        System.out.print("Testing getX...");
         assert 13.2 == p.getX() : String.format (
             "Failed! Expected 13.2 but got %f",
             p.getX());
+        System.out.println("OK!");
     }
 
     private void testGetY() {
@@ -19,9 +27,11 @@ public class PointTest {
         // The returned y-component should be 13.2
         Point p = new Point(0, 13.2); 
 
+        System.out.print("Testing getY...");
         assert 13.2 == p.getY() : String.format (
             "Failed! Expected 13.2 but got %f",
             p.getX());
+        System.out.println("OK!");
     }
 
     private void testQuadrant () {
@@ -41,6 +51,7 @@ public class PointTest {
         assert 3 == p.quadrant() : String.format (
             "Failed! Expected 3 but got %d",
             p.quadrant());
+        System.out.println("OK!");
     }
 
     private void testDistanceTo () {
@@ -108,16 +119,20 @@ public class PointTest {
         
         // The new point should have 0 distance to a point (1,1) 
         Point pn = p1.minus(p2);
+        System.out.print("Testing minus (test 1)...");
         assert 0 == pn.distanceTo(pc) : String.format(
             "Failed! Expected 0 distance to %s, but new point has coordinates %s",
             pc.toString(), pn.toString());
+        System.out.println("OK!");
         
         // Test that negative numbers work
         p1 = new Point(0, 0);
         p2 = new Point(-1, -1);
         pn = p1.minus(p2);
+        System.out.print("Testing minus (test 2)...");
         assert 0 == pn.distanceTo(pc) : String.format(
             "Failed! Expected 0 distance to %s, but new point has coordinates %s",
             pc.toString(), pn.toString());
+        System.out.println("OK!");
     }
 }
