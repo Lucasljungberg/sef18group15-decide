@@ -148,18 +148,29 @@ public class LICTest {
         System.out.println("OK!");
     }
     public void testLIC6() {
-        // contract: correctly check if the LIC1 is met.
-        
-        // initialization. next four variables should be custom initialized
-        int NUMPOINTS = 0;
-        Point[] POINTS;
-        LICParameters PARAMETERS;
-        boolean met = false;
+        // contract: correctly check if the LIC6 is met.
+        //
         
         // body
+        int NUMPOINTS = 5;
+        int nPoints = 3;
+        double dist = 2;
+        Point[] POINTS = { new Point(1,0), new Point(1.5, 2.1), new Point(2, 0), new Point(-1, -2), new Point(1.5, 0)};
+        LICParameters PARAMETERS = new LICParameters(3, 3, 1, 2, 3, 1, dist, nPoints, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2);
+        ABMInput input = new ABMInput();
+        input.NUMPOINTS = NUMPOINTS;
+        input.POINTS = POINTS;
+        input.PARAMETERS = PARAMETERS;
+        ABMSystem system = new ABMSystem(input);
+        
+        System.out.print("Testing LIC6... ");
+        
+        boolean met = system.checkLIC6(input);
+        
         
         // assertion.
         assert true == met : "Failed test for LIC 6. Got " + met + " but expected true";
+        System.out.println("OK!");
     }
     
     public void testLIC7() {
