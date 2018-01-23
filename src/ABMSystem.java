@@ -213,21 +213,37 @@ public class ABMSystem {
         
         return holds;
     }
-    /** check if the LIC7 holds
+
+     /** check if the LIC7 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC7 () {
-        // holds = return result
-        boolean holds = true;
+    public boolean checkLIC7 (ABMInput input) {
+        if (input.NUMPOINTS < 3) return false;
+
+        int kpts = input.PARAMETERS.getKPoints();
         
-        // body-start
-        
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
-        
-        // body-end
-        
-        return holds;
+        Point p1;
+        Point p2;
+
+        int i = 0;
+        int end = kpts + 2;
+        while (end <= input.NUMPOINTS) {
+            p1 = input.POINTS[i];
+            p2 = input.POINTS[i + kpts + 1];
+
+            double distance = p1.distanceTo(p2);
+
+            if (distance > input.PARAMETERS.getLength1()) {
+            	return true;
+            }
+            i++;
+            end++;
+        }
+        // no pair of points far enough apart
+        return false;  
     }
+
+
     /** 
      * check if the LIC8 holds
      * @return true if the LIC holds, false otherwise

@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class LICTest {
     public static void main(String[] args) {
         LICTest test = new LICTest();
-        test.testLIC14();
+        test.testLIC7();
     }
     
     public void testLIC0() {
@@ -163,18 +163,30 @@ public class LICTest {
     }
     
     public void testLIC7() {
-        // contract: correctly check if the LIC1 is met.
+        // contract: correctly check if the LIC7 is met.
+        // the test should return false if no two points, separated by two consecutive points, are farther than 10 apart
         
         // initialization. next four variables should be custom initialized
-        int NUMPOINTS = 0;
-        Point[] POINTS;
-        LICParameters PARAMETERS;
+        int NUMPOINTS = 4;
+        int kpoints = 2;
+        double length1 = 10;
+        Point[] POINTS = { new Point(1,2), new Point(-1, -2.1), new Point(0, 0), new Point(-1, -2)};
+        LICParameters PARAMETERS = new LICParameters(length1, 5, 2, 3, 2, 6, 3, 3, kpoints, 3, 2, 1, 2, 10, 2, 5, 2, 3, 1);
         boolean met = false;
+        ABMInput input = new ABMInput();
+        input.NUMPOINTS = NUMPOINTS;
+        input.POINTS = POINTS;
+        input.PARAMETERS = PARAMETERS;
+        ABMSystem system = new ABMSystem(input);
         
+        System.out.print("Testing LIC7... ");
         // body
-        
+        met = system.checkLIC7(input);
+    
+
         // assertion.
-        assert true == met : "Failed test for LIC 7. Got " + met + " but expected true";
+        assert false == met : "Failed test for LIC 7. Got " + met + " but expected false";
+        System.out.println("OK!");
     }
     
     public void testLIC8() {
