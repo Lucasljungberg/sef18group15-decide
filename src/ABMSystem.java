@@ -301,14 +301,14 @@ public class ABMSystem {
                 double minRadius = (a*b*c) / 
                     Math.sqrt((a+b+c)*(b+c-a)*(c+a-b)*(a+b-c));
 
-                if (minRadius > input.PARAMETERS.getRadius1()) return false;
+                if (minRadius > input.PARAMETERS.getRadius1()) return true;
             }
             i++;
             end++;
         }
 
         // All points fit inside a circle
-        return true;
+        return false;
     }
     /** check if the LIC9 holds
      * @return true if the LIC holds, false otherwise
