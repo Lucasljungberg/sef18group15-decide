@@ -77,7 +77,7 @@ public class LICTest {
         // The test should return a true if there is a triangle formed by some three consecutive points with an area > area1
         
         // body
-        int NUMPOINTS = 3;
+        int NUMPOINTS = 4;
         double area1 = 1;
         Point[] POINTS = { new Point(1,2), new Point(-1, -2.1), new Point(0, 0), new Point(-1, -2)};
         LICParameters PARAMETERS = new LICParameters(3, 3, 1, area1, 3, 1, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2);
