@@ -438,16 +438,39 @@ public class ABMSystem {
     /** check if the LIC12 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC12 () {
+    public boolean checkLIC12 (ABMInput input) {
+        // condition is not met if NUMPOINTS < 3
+        if (input.NUMPOINTS < 3) {
+            return false;
+        }
         // holds = return result
-        boolean holds = true;
+        boolean holds = false;
+        boolean holds1 = false;
+        boolean holds2 = false;
         
         // body-start
+        ArrayList<Point> points = new ArrayList<Point>();
+        for (int i = 0; i < input.NUMPOINTS; i++) {
+            points.add(input.POINTS[i]);
+        }
+        double length1 = input.PARAMETERS.getLength1();
+        double length2 = input.PARAMETERS.getLength2();
+        int kpts = input.PARAMETERS.getKPoints();
         
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
-        
+        for (int i = 0; i < points.size() - kpts - 1; i++) {
+            if (points.get(i).distanceTo(points.get(i+kpts+1)) > length1) {
+                System.out.println("more than " + length1 + " apart");
+                holds1 = true;
+            }
+            if (points.get(i).distanceTo(points.get(i+kpts+1)) < length2) {
+                System.out.println("less than " + length2 + " apart");
+                holds2 = true;
+            }
+        }
         // body-end
-        
+        if (holds1 == true && holds2 == true) {
+            holds = true;
+        }
         return holds;
     }
     /** check if the LIC13 holds

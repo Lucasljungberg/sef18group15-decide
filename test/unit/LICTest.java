@@ -5,6 +5,7 @@ public class LICTest {
     public static void main(String[] args) {
         LICTest test = new LICTest();
         test.testLIC10();
+        test.testLIC12();
     }
     
     public void testLIC0() {
@@ -366,18 +367,74 @@ public class LICTest {
         System.out.println("OK!");
     }
     public void testLIC12() {
-        // contract: correctly check if the LIC1 is met.
+        // contract: correctly check if the LIC12 is met.
+        // the test should return false if no two points separated by 2 points are farther than 3, or less than 10 apart
         
-        // initialization. next four variables should be custom initialized
-        int NUMPOINTS = 0;
-        Point[] POINTS;
-        LICParameters PARAMETERS;
-        boolean met = false;
+        // test 1
+        int NUMPOINTS = 4;
+        double length1 = 1;
+        double length2 = 1;
+        int kPoints = 1;
         
-        // body
+        Point[] POINTS = { new Point(1,0), new Point(-1, 0), new Point(0, 0), new Point(-2, 0)};
+        LICParameters PARAMETERS = new LICParameters(length1, 3, 2, 2, 3, 1, 3, 2, kPoints, 2, 2, 2, 2, 2, 2, 2, length2, 3, 2);
+    
+        ABMInput input = new ABMInput();
+        input.NUMPOINTS = NUMPOINTS;
+        input.POINTS = POINTS;
+        input.PARAMETERS = PARAMETERS;
+        ABMSystem system = new ABMSystem(input);
+        
+        System.out.print("Testing LIC12... ");
+        boolean met = system.checkLIC12(input);
         
         // assertion.
-        assert true == met : "Failed test for LIC 12. Got " + met + " but expected true";
+        assert false == met : "Failed test1 for LIC 12. Got " + met + " but expected false";
+        System.out.println("OK!");
+        
+        // test 2
+        NUMPOINTS = 4;
+        length1 = 0.9;
+        length2 = 2;
+        kPoints = 1;
+        
+        Point[] POINTS2 = { new Point(1,0), new Point(-1, 0), new Point(0, 0), new Point(-2, 0)};
+        PARAMETERS = new LICParameters(length1, 3, 2, 2, 3, 1, 3, 2, kPoints, 2, 2, 2, 2, 2, 2, 2, length2, 3, 2);
+        
+        //ABMInput input = new ABMInput();
+        input.NUMPOINTS = NUMPOINTS;
+        input.POINTS = POINTS2;
+        input.PARAMETERS = PARAMETERS;
+        ABMSystem system2 = new ABMSystem(input);
+        
+        System.out.print("Testing LIC12... ");
+        met = system2.checkLIC12(input);
+        
+        // assertion.
+        assert true == met : "Failed test2 for LIC 12. Got " + met + " but expected true";
+        System.out.println("OK!");
+        
+        // test 3
+        NUMPOINTS = 4;
+        length1 = 0.9;
+        length2 = 1;
+        kPoints = 1;
+        
+        Point[] POINTS3 = { new Point(1,0), new Point(-1, 0), new Point(0, 0), new Point(-2, 0)};
+        PARAMETERS = new LICParameters(length1, 3, 2, 2, 3, 1, 3, 2, kPoints, 2, 2, 2, 2, 2, 2, 2, length2, 3, 2);
+        
+        //ABMInput input = new ABMInput();
+        input.NUMPOINTS = NUMPOINTS;
+        input.POINTS = POINTS2;
+        input.PARAMETERS = PARAMETERS;
+        ABMSystem system3 = new ABMSystem(input);
+        
+        System.out.print("Testing LIC12... ");
+        met = system3.checkLIC12(input);
+        
+        // assertion.
+        assert false == met : "Failed test3 for LIC 12. Got " + met + " but expected false";
+        System.out.println("OK!");
     }
     
     public void testLIC13() {
