@@ -56,7 +56,7 @@ public class PointTest {
 
         p2 = new Point(3, 4);
         // Pythagoras tells us this should be 5
-        System.out.print("Testing distanceTo (test 1)...");
+        System.out.print("Testing distanceTo (test 2)...");
         assert 5 == p1.distanceTo(p2) : String.format(
             "Failed! Expected 5 but got %f",
             p1.distanceTo(p2));
@@ -65,10 +65,40 @@ public class PointTest {
         // Reverse the order to see that it works that way
         p2 = new Point(0, 0);
         p1 = new Point(4, 3);
-        System.out.print("Testing distanceTo (test 1)...");
+        System.out.print("Testing distanceTo (test 3)...");
         assert 5 == p1.distanceTo(p2) : String.format(
             "Failed! Expected 5 but got %f",
             p1.distanceTo(p2));
         System.out.println("OK!");
+    }
+
+    private void testDotProduct () {
+        Point p1 = new Point(1, 2);
+        Point p2 = new Point(3, 4);
+
+        // The following test should be 1*2 + 3*4 = 2+12 = 14
+        System.out.print("Testing dotProduct (test 1)...");
+        assert 14 == p1.dotProduct(p2) : String.format(
+            "Failed! Expected 14 but got %f",
+            p1.dotProduct(p2));
+        System.out.println("OK!");
+
+        // Check negative numbers. -1*2 + 3*4 = -2 + 12 = 10
+        System.out.print("Testing dotProduct (test 2)...");
+        p1 = new Point(-1, 2);
+        assert 10 == p1.dotProduct(p2) : String.format(
+            "Failed! Expected 10 but got %f",
+            p1.dotProduct(p2));
+        System.out.println("OK!");
+
+        // Check base-case (0,0) and (0,0). The result should be 0
+        p1 = new Point(0,0);
+        p2 = new Point(0,0);
+        System.out.print("Testing dotProduct (test 3)...");
+        assert 0 == p1.dotProduct(p2) : String.format(
+            "Failed! Expected 0 but got %f",
+            p1.dotProduct(p2));
+        System.out.println("OK!");
+
     }
 }
