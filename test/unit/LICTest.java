@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class LICTest {
     public static void main(String[] args) {
         LICTest test = new LICTest();
-        test.testLIC7();
+        test.testLIC8();
     }
     
     public void testLIC0() {
@@ -213,7 +213,7 @@ public class LICTest {
         boolean met = system.checkLIC8(input);
 
         System.out.print("Testing LIC8 (test 1)...");
-        assert false == met : "Failed test for LIC 8. Got " + met + " but expected false";
+        assert true == met : "Failed test for LIC 8. Got " + met + " but expected true";
         System.out.println("OK!");
 
         // Testing case when NUMPOINTS < 5
@@ -251,7 +251,7 @@ public class LICTest {
         input.PARAMETERS = PARAMETERS;
         met = system.checkLIC8(input);
         System.out.print("Testing LIC8 (test 3)...");
-        assert false == met : "Failed test for LIC 8. Got " + met + " but expected false";
+        assert true == met : "Failed test for LIC 8. Got " + met + " but expected true";
         System.out.println("OK!");
 
     }
