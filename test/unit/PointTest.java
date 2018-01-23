@@ -99,6 +99,25 @@ public class PointTest {
             "Failed! Expected 0 but got %f",
             p1.dotProduct(p2));
         System.out.println("OK!");
+    }
 
+    private void testMinus () {
+        Point p1 = new Point(2, 2);
+        Point p2 = new Point(1, 1);
+        Point pc = new Point(1, 1);
+        
+        // The new point should have 0 distance to a point (1,1) 
+        Point pn = p1.minus(p2);
+        assert 0 == pn.distanceTo(pc) : String.format(
+            "Failed! Expected 0 distance to %s, but new point has coordinates %s",
+            pc.toString(), pn.toString());
+        
+        // Test that negative numbers work
+        p1 = new Point(0, 0);
+        p2 = new Point(-1, -1);
+        pn = p1.minus(p2);
+        assert 0 == pn.distanceTo(pc) : String.format(
+            "Failed! Expected 0 distance to %s, but new point has coordinates %s",
+            pc.toString(), pn.toString());
     }
 }
