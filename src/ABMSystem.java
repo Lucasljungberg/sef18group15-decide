@@ -113,6 +113,9 @@ public class ABMSystem {
             double length2 = p2.distanceTo(p3);
             double length3 = p1.distanceTo(p3);
 
+            // Check if point 1 or 3 coincides with point 2
+            if ((length1 == 0) || (length2 == 0)) continue;
+
             // Using the Law of Cosines with p2 as c
             double angle = Math.acos(
                     (Math.pow(length1, 2) + Math.pow(length2, 2) - Math.pow(length3, 2)) / 
