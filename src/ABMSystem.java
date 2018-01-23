@@ -328,18 +328,54 @@ public class ABMSystem {
     /** check if the LIC10 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC10 () {
-        // holds = return result
-        boolean holds = true;
+    public boolean checkLIC10 (ABMInput input) {
+    	if (input.NUMPOINTS < 5) return false;
+
+        double area1 = input.PARAMETERS.getArea1();
+
+        int epts = input.PARAMETERS.getEPoints();
+        int fpts = input.PARAMETERS.getFPoints();
         
-        // body-start
-        
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
-        
-        // body-end
-        
-        return holds;
+        Point p1;
+        Point p2;
+        Point p3;
+
+		double side1;
+        double side2;
+        double side3;
+
+        double area;
+
+        // half perimeter.
+        double p;
+
+        // finding and checking relevant combinations of points
+        int i = 0;
+        int end = epts + fpts + 3;
+        while (end <= input.NUMPOINTS) {
+            p1 = input.POINTS[i];
+            p2 = input.POINTS[i + epts + 1];
+            p3 = input.POINTS[i + epts + 1 + fpts + 1];
+
+            side1 = p1.distanceTo(p2);
+	        side2 = p2.distanceTo(p3);
+	        side3 = p3.distanceTo(p1);
+
+	        // calculate area using Heron's formula
+	        p = (side1 + side2 + side3) / 2;
+            area = Math.sqrt(p * (p - side1) * (p - side2) * (p - side3));
+
+            if (area > area1) {
+                return true;
+            }
+
+			i++;
+            end++;
+	    }
+	    // No area big enough
+	    return false;
     }
+
     /** check if the LIC11 holds
      * @return true if the LIC holds, false otherwise
      */
