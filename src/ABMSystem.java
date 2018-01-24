@@ -163,21 +163,32 @@ public class ABMSystem {
         
         return holds;
     }
+
+
     /** check if the LIC4 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC4 () {
-        // holds = return result
-        boolean holds = true;
-        
-        // body-start
-        
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
-        
-        // body-end
-        
-        return holds;
+    public boolean checkLIC4 (ABMInput input) {
+        int qpts = input.PARAMETERS.getQPoints();
+        int quads = input.PARAMETERS.getQuads();
+ 
+        for (int i = 0; i < input.NUMPOINTS - qpts + 1; i++) {
+            boolean[] qs = new boolean[4];
+            int numQuads = 0;
+ 
+            for (int j = 0; j < qpts; j++) {
+                int q = input.POINTS[i + j].quadrant();
+                qs[q-1] = true;
+            }
+ 
+            for (int j = 0; j < 4; j++) {
+                if (qs[j]) numQuads++;
+            }
+            if (numQuads > quads) return true;
+        }
+        return false;
     }
+
     /** check if the LIC5 holds
      * @return true if the LIC holds, false otherwise
      */

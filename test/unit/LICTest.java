@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class LICTest {
     public static void main(String[] args) {
         LICTest test = new LICTest();
-        test.testLIC10();
+        test.testLIC4();
     }
     
     public void testLIC0() {
@@ -100,17 +100,89 @@ public class LICTest {
     
     public void testLIC4() {
         // contract: correctly check if the LIC1 is met.
+        // The test should return true if there are qpoints consecutive points that lie in more than quads quadrants.
+
+        // test 1: smallest case
+        int NUMPOINTS = 2;
+        int qPoints = 2;
+        int quads = 1;
+        LICParameters PARAMETERS = new LICParameters(3, 3, 1, 2, qPoints, quads, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2);
+        boolean met = true;
+        ABMInput input = new ABMInput();
+        input.NUMPOINTS = NUMPOINTS;
+        input.POINTS = new Point[]{ new Point(1,2), new Point(-1, -2.1)};
+        input.PARAMETERS = PARAMETERS;
+        ABMSystem system = new ABMSystem(input);
         
-        // initialization. next four variables should be custom initialized
-        int NUMPOINTS = 0;
-        Point[] POINTS;
-        LICParameters PARAMETERS;
-        boolean met = false;
+        System.out.print("Testing LIC4... (test 1) ");
         
-        // body
+        met = system.checkLIC4(input);
         
         // assertion.
         assert true == met : "Failed test for LIC 4. Got " + met + " but expected true";
+        System.out.println("OK!");
+
+        // test 2: big case
+        NUMPOINTS = 6;
+        qPoints = 4;
+        quads = 3;
+        Point[] POINTS = { new Point(-1, 2), new Point(-1, -2.1), new Point(-1, 1), new Point(1, -2), new Point(1, 2.1), new Point(-1, -1)};
+        PARAMETERS = new LICParameters(3, 3, 1, 2, qPoints, quads, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2);
+        met = true;
+        input = new ABMInput();
+        input.NUMPOINTS = NUMPOINTS;
+        input.POINTS = POINTS;
+        input.PARAMETERS = PARAMETERS;
+        system = new ABMSystem(input);
+        
+        System.out.print("Testing LIC4... (test 2) ");
+        
+        met = system.checkLIC4(input);
+        
+        // assertion.
+        assert true == met : "Failed test for LIC 4. Got " + met + " but expected true";
+        System.out.println("OK!");
+
+
+        // test 3: false case
+        NUMPOINTS = 4;
+        qPoints = 4;
+        quads = 3;
+        PARAMETERS = new LICParameters(3, 3, 1, 2, qPoints, quads, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2);
+        met = true;
+        input = new ABMInput();
+        input.NUMPOINTS = NUMPOINTS;
+        input.POINTS = new Point[]{ new Point(-1,2), new Point(-1, -2.1), new Point(-1, -2), new Point(-1, -1)};
+        input.PARAMETERS = PARAMETERS;
+        system = new ABMSystem(input);
+        
+        System.out.print("Testing LIC4... (test 3) ");
+        
+        met = system.checkLIC4(input);
+        
+        // assertion.
+        assert false == met : "Failed test for LIC 4. Got " + met + " but expected false";
+        System.out.println("OK!");
+
+        // test 4: false case
+        NUMPOINTS = 4;
+        qPoints = 4;
+        quads = 3;
+        PARAMETERS = new LICParameters(3, 3, 1, 2, qPoints, quads, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2);
+        met = true;
+        input = new ABMInput();
+        input.NUMPOINTS = NUMPOINTS;
+        input.POINTS = new Point[]{ new Point(-1,2), new Point(1, -2.1), new Point(-1, -2), new Point(-1, -1)};
+        input.PARAMETERS = PARAMETERS;
+        system = new ABMSystem(input);
+        
+        System.out.print("Testing LIC4... (test 4) ");
+        
+        met = system.checkLIC4(input);
+        
+        // assertion.
+        assert false == met : "Failed test for LIC 4. Got " + met + " but expected false";
+        System.out.println("OK!");
     }
     
     public void testLIC5() {
