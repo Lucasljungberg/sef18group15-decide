@@ -119,7 +119,7 @@ public class ABMSystem {
                 max = c;
             }
             
-            if (angle > Math.PI / 2) {
+            if (angle > Math.PI) {
                 if (max > 2 * input.PARAMETERS.getRadius1()) return false;
             } else {
                 // Find the smallest circle that fits all three points

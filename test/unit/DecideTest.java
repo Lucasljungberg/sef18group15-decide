@@ -108,22 +108,22 @@ public class DecideTest {
             { ABMInput.Connector.NOTUSED, ABMInput.Connector.NOTUSED, ABMInput.Connector.NOTUSED, ABMInput.Connector.NOTUSED, ABMInput.Connector.NOTUSED, ABMInput.Connector.NOTUSED, ABMInput.Connector.NOTUSED, ABMInput.Connector.NOTUSED, ABMInput.Connector.NOTUSED, ABMInput.Connector.NOTUSED, ABMInput.Connector.NOTUSED, ABMInput.Connector.NOTUSED, ABMInput.Connector.NOTUSED, ABMInput.Connector.NOTUSED, ABMInput.Connector.NOTUSED }
         };
         // still setup for PUM
-        //        this.system.CMV = new boolean[] {  false, true, false, true, true,
-        //            true, true, true, true, true,
-        //            true, true, true, true, true };
+//        this.system.CMV = new boolean[] {  false, true, false, true, true,
+//            true, true, true, true, true,
+//            true, true, true, true, true };
         // setup for FUV
         this.input.PUV = new boolean[] {true, true, true, true, true, true, true, true, true, true, true, true, true, true, true};
         // setup for LIC
         int NUMPOINTS = 10;
         // double length1 = 10;
-        Point[] POINTS = { new Point(10,2), new Point(-1, -2.1), new Point(0, 0), new Point(3, 5), new Point(6, 0), new Point(0,0), new Point(3,0), new Point(0,0), new Point(0,0), new Point(0,0)};
-        LICParameters PARAMETERS = new LICParameters(10, 10, 1, 2, 3, 1, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2);
+        Point[] POINTS = { new Point(3,2), new Point(-1, -2.1), new Point(0, 0), new Point(3, 5), new Point(3, 0), new Point(0,0), new Point(3,0), new Point(0,0), new Point(0,0), new Point(0,0)};
+        LICParameters PARAMETERS = new LICParameters(3, 10, 1, 2, 3, 1, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2);
         this.input.NUMPOINTS = NUMPOINTS;
         this.input.POINTS = POINTS;
         this.input.PARAMETERS = PARAMETERS;
         System.out.print("Testing decide...");
         assert true == this.system.decide(this.input): String.format(
-                                                                     "Failed decide test3! Expected true but got %b", this.system.decide(this.input));
+                                                                   "Failed decide test3! Expected true but got %b", this.system.decide(this.input));
         System.out.println("OK!");
     }
 
