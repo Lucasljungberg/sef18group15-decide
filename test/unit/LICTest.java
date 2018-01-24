@@ -559,20 +559,48 @@ public class LICTest {
         assert false == met : "Failed test3 for LIC 12. Got " + met + " but expected false";
         System.out.println("OK!");
     }
-    
     public void testLIC13() {
         // contract: correctly check if the LIC13 is met.
         
-        // initialization. next four variables should be custom initialized
-        int NUMPOINTS = 0;
-        Point[] POINTS;
-        LICParameters PARAMETERS;
+        // Positive test
         boolean met = false;
-        
-        // body
-        
-        // assertion.
+        ABMInput input = new ABMInput();
+        input.NUMPOINTS = 6;
+        input.POINTS = new Point[] { new Point(-2,-2),new Point(1,0),new Point(-2,2),new Point(0,0),new Point(0,0),new Point(0.5,-0.5)};
+        int apts = 1, bpts = 1;
+        double radius1 = 1.0, radius2 = 2.0;
+        input.PARAMETERS = new LICParameters(3, radius1, 1, 1, 3, 1, 3, 2, 2, apts, bpts, 2, 2, 1, 1, 1, 3, radius2, 1);
+        ABMSystem system = new ABMSystem(input);
+
+        System.out.print("Testing LIC13 (test 1)...");
+        assert false == met : "Failed test for LIC 13. Got " + met + " but expected false";
+        System.out.println("OK!");
+
+        // Negative test
+        radius2 = 1.5;
+        input.NUMPOINTS = 5;
+        input.PARAMETERS = new LICParameters(3, radius1, 1, 1, 3, 1, 3, 2, 2, apts, bpts, 2, 2, 1, 1, 1, 3, radius2, 1);
+        input.POINTS = new Point[] {new Point(2,0),new Point(9,9),new Point(0,-2),new Point(10,10),new Point(-2,2)};
+        System.out.print("Testing LIC13 (test 2)...");
         assert true == met : "Failed test for LIC 13. Got " + met + " but expected true";
+        System.out.println("OK!");
+
+        // Positive test
+        radius2 = 1;
+        input.NUMPOINTS = 6;
+        input.PARAMETERS = new LICParameters(3, radius1, 1, 1, 3, 1, 3, 2, 2, apts, bpts, 2, 2, 1, 1, 1, 3, radius2, 1);
+        input.POINTS = new Point[] {new Point(1,1),new Point(1,0),new Point(-1,-1),new Point(-1,0),new Point(-1,1),new Point(0,-1)};
+        System.out.print("Testing LIC13 (test 3)...");
+        assert true == met : "Failed test for LIC 13. Got " + met + " but expected true";
+        System.out.println("OK!");
+
+        // Test NUMPOINTS < 5 condition
+        input.NUMPOINTS = 3;
+        input.PARAMETERS = new LICParameters(3, radius1, 1, 1, 3, 1, 3, 2, 2, apts, bpts, 2, 2, 1, 1, 1, 3, radius2, 1);
+        input.POINTS = new Point[] {new Point(1,1),new Point(1,0),new Point(-1,-1)};
+        System.out.print("Testing LIC13 (test 4)...");
+        assert false == met : "Failed test for LIC 13. Got " + met + " but expected false";
+        System.out.println("OK!");
     }
     
     public void testLIC14() {

@@ -577,17 +577,75 @@ public class ABMSystem {
      * @return true if the LIC holds, false otherwise
      */
     public boolean checkLIC13 () {
-        // holds = return result
-        boolean holds = true;
-        
+        if (input.NUMPOINTS < 5) return false;
+ 
+        int apts = input.PARAMETERS.getAPoints();
+        int bpts = input.PARAMETERS.getBPoints();
+        double radius1 = input.PARAMETERS.getRadius1();
+        double radius2 = input.PARAMETERS.getRadius2();
+        boolean btR1 = false, stR2 = false;
+       
         // body-start
-        
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
-        
-        // body-end
-        
-        return holds;
+        Point p1;
+        Point p2;
+        Point p3;
+        int i = 0;
+        int end = apts + bpts + 3;
+        while (end <= input.NUMPOINTS) {
+            p1 = input.POINTS[i];
+            p2 = input.POINTS[i + apts + 1];
+            p3 = input.POINTS[i + apts + 1 + bpts + 1];
+ 
+            // Find the length of all legs that form a triangle
+            double a = p1.distanceTo(p2);
+            double b = p1.distanceTo(p3);
+            double c = p2.distanceTo(p3);
+ 
+            double angle = Math.PI;
+            double max = 0.0;
+ 
+            // Find the longest leg. Check if angle of the other two legs are < 90 degrees
+            if (a > b && a > c) {
+                angle = Math.acos(
+                    (Math.pow(b, 2) + Math.pow(c, 2) - Math.pow(a, 2)) /
+                    (2 * b * c)
+                );
+                max = a;
+            } else if (b > a && b > c) {
+                angle = Math.acos(
+                    (Math.pow(a, 2) + Math.pow(c, 2) - Math.pow(b, 2)) /
+                    (2 * a * c)
+                );
+                max = b;
+            } else if (c > a && c > b) {
+                angle = Math.acos(
+                    (Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2)) /
+                    (2 * a * b)
+                );
+                max = c;
+            }
+ 
+            if (angle > Math.PI) {
+                if (max > 2 * radius1) btR1 = true;
+                if (max < 2 * radius2) stR2 = true;
+            } else {
+                // Find the smallest circle that fits all three points
+                double minRadius = (a*b*c) /
+                    Math.sqrt((a+b+c)*(b+c-a)*(c+a-b)*(a+b-c));
+ 
+                if (minRadius > radius1) btR1 = true;
+                if (minRadius < radius2) stR2 = true;
+            }
+            if (btR1 && stR2) return true;
+            i++;
+            end++;
+        }
+ 
+        // Both requirements were not filled
+        return false;
     }
+
+
     /** check if the LIC14 holds
      * @return true if the LIC holds, false otherwise
      */
