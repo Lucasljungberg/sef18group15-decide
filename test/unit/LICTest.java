@@ -587,7 +587,8 @@ public class LICTest {
         ABMSystem system = new ABMSystem(input);
 
         System.out.print("Testing LIC13 (test 1)...");
-        assert false == met : "Failed test for LIC 13. Got " + met + " but expected false";
+        met = system.checkLIC13(input);
+        assert true == met : "Failed test for LIC 13. Got " + met + " but expected true";
         System.out.println("OK!");
 
         // Negative test
@@ -596,23 +597,16 @@ public class LICTest {
         input.PARAMETERS = new LICParameters(3, radius1, 1, 1, 3, 1, 3, 2, 2, apts, bpts, 2, 2, 1, 1, 1, 3, radius2, 1);
         input.POINTS = new Point[] {new Point(2,0),new Point(9,9),new Point(0,-2),new Point(10,10),new Point(-2,2)};
         System.out.print("Testing LIC13 (test 2)...");
-        assert true == met : "Failed test for LIC 13. Got " + met + " but expected true";
-        System.out.println("OK!");
-
-        // Positive test
-        radius2 = 1;
-        input.NUMPOINTS = 6;
-        input.PARAMETERS = new LICParameters(3, radius1, 1, 1, 3, 1, 3, 2, 2, apts, bpts, 2, 2, 1, 1, 1, 3, radius2, 1);
-        input.POINTS = new Point[] {new Point(1,1),new Point(1,0),new Point(-1,-1),new Point(-1,0),new Point(-1,1),new Point(0,-1)};
-        System.out.print("Testing LIC13 (test 3)...");
-        assert true == met : "Failed test for LIC 13. Got " + met + " but expected true";
+        met = system.checkLIC13(input);
+        assert false == met : "Failed test for LIC 13. Got " + met + " but expected false";
         System.out.println("OK!");
 
         // Test NUMPOINTS < 5 condition
         input.NUMPOINTS = 3;
         input.PARAMETERS = new LICParameters(3, radius1, 1, 1, 3, 1, 3, 2, 2, apts, bpts, 2, 2, 1, 1, 1, 3, radius2, 1);
         input.POINTS = new Point[] {new Point(1,1),new Point(1,0),new Point(-1,-1)};
-        System.out.print("Testing LIC13 (test 4)...");
+        System.out.print("Testing LIC13 (test 3)...");
+        met = system.checkLIC13(input);
         assert false == met : "Failed test for LIC 13. Got " + met + " but expected false";
         System.out.println("OK!");
     }
@@ -641,7 +635,7 @@ public class LICTest {
             new Point(0, 0), 
             new Point(2, 0),
             new Point(0, 0),
-            new Point(0, 1.5),
+            new Point(0, 3),
             new Point(0, 0)
         };
         epts = 1; fpts = 1;
@@ -660,14 +654,14 @@ public class LICTest {
             new Point(0, 0), 
             new Point(2, 0),
             new Point(2, 0),
-            new Point(0, 3),
-            new Point(0, 3)
+            new Point(0, 5),
+            new Point(0, 5)
         };
         epts = 1; fpts = 1;
         area1 = 2.0; area2 = 4.0;
         input.PARAMETERS = new LICParameters(3, 3, 1, area1, 3, 1, 3, 2, 2, 2, 2, 2, 2, epts, fpts, 1, 3, 3, area2);
 
-        System.out.print("Testing LIC14 (test 2)...");
+        System.out.print("Testing LIC14 (test 3)...");
         met = system.checkLIC14(input);
         assert false == met : "Failed test for LIC 14. Got " + met + " but expected false";
         System.out.println("OK!");
