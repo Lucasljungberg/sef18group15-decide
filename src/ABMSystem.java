@@ -747,7 +747,29 @@ public class ABMSystem {
      *                  to not fire.
      */
     private boolean decide (ABMInput input) {
-        
+        this.CMV[0] = this.checkLIC0(input);
+        this.CMV[1] = this.checkLIC1(input);
+        this.CMV[2] = this.checkLIC2(input);
+        this.CMV[3] = this.checkLIC3(input);
+        this.CMV[4] = this.checkLIC4(input);
+        this.CMV[5] = this.checkLIC5(input);
+        this.CMV[6] = this.checkLIC6(input);
+        this.CMV[7] = this.checkLIC7(input);
+        this.CMV[8] = this.checkLIC8(input);
+        this.CMV[9] = this.checkLIC9(input);
+        this.CMV[10] = this.checkLIC10(input);
+        this.CMV[11] = this.checkLIC11(input);
+        this.CMV[12] = this.checkLIC12(input);
+        this.CMV[13] = this.checkLIC13(input);
+        this.CMV[14] = this.checkLIC14(input);
+
+        // Construct the PUM from the results of the CMV
+        this.computePUM(input);
+
+        // Constructs the FUV from the PUM
+        this.computeFUV(input);
+
+
         // Check the FUV. Return true afterwards iff no entries in the
         // FUV is false
         for (int i = 0; i < 15; i++) {
