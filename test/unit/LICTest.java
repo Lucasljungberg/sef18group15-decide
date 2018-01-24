@@ -31,20 +31,46 @@ public class LICTest {
         assert false == met : "Failed test for LIC 0. Got " + met + " but expected false";
         System.out.println("OK!");
     }
-    
+
     public void testLIC1() {
         // contract: correctly check if the LIC1 is met.
         
-        // initialization. next four variables should be custom initialized
-        int NUMPOINTS = 0;
-        Point[] POINTS;
-        LICParameters PARAMETERS;
-        boolean met = false;
+        // Checking case of the shorter legs forming <= 90 degree angle and big enough circle
+        int NUMPOINTS = 3;
+        Point[] POINTS = {
+            new Point(0, 0),
+            new Point(3, 5),
+            new Point(6, 0),
+        };
+        double radius = 3;
+        LICParameters PARAMETERS = new LICParameters(3, radius, 1, 2, 3, 1, 3, 2, 2, 1, 2, 2, 2, 2, 2, 2, 3, 3, 2);
+        ABMInput input = new ABMInput();
+        input.NUMPOINTS = NUMPOINTS;
+        input.POINTS = POINTS;
+        input.PARAMETERS = PARAMETERS;
+        ABMSystem system = new ABMSystem(input);
+        boolean met = system.checkLIC1(input);
         
-        // body
-        
-        // assertion.
+        System.out.print("Testing LIC1 (test 1)...");
         assert true == met : "Failed test for LIC 1. Got " + met + " but expected true";
+        System.out.println("OK!");
+        
+        
+        // Testing case when the angle of the smaller legs > 90 degrees
+        input.NUMPOINTS = 3;
+        input.POINTS = new Point[]{
+            new Point(0, 0),
+            new Point(3, 2),
+            new Point(6, 0),
+        };
+        radius = 4;
+        PARAMETERS = new LICParameters(3, radius, 1, 2, 3, 1, 3, 2, 2, 1, 1, 2, 2, 2, 2, 2, 3, 3, 2);
+        input.PARAMETERS = PARAMETERS;
+        met = system.checkLIC1(input);
+        System.out.print("Testing LIC1 (test 2)...");
+        assert false == met : "Failed test for LIC 1. Got " + met + " but expected false";
+        System.out.println("OK!");
+        
     }
     
     public void testLIC2() {
