@@ -4,8 +4,9 @@ import java.util.ArrayList;
 public class ABMSystem {
 
     public static void main(String[] args) {
-        new ABMSystem();
+        ABMSystem system = new ABMSystem();
     }
+
 
     /**
      * Conditions Met Vector
@@ -118,7 +119,7 @@ public class ABMSystem {
                 max = c;
             }
             
-            if (angle > Math.PI) {
+            if (angle > Math.PI / 2) {
                 if (max > 2 * input.PARAMETERS.getRadius1()) return false;
             } else {
                 // Find the smallest circle that fits all three points
@@ -414,7 +415,7 @@ public class ABMSystem {
                 max = c;
             }
 
-            if (angle > Math.PI) {
+            if (angle > Math.PI) {  // should change to PI / 2? But then produces an error
                 if (max > 2 * input.PARAMETERS.getRadius1()) return false;
             } else {
                 // Find the smallest circle that fits all three points
@@ -640,7 +641,7 @@ public class ABMSystem {
                 max = c;
             }
  
-            if (angle > Math.PI) {
+            if (angle > Math.PI / 2) {
                 if (max > 2 * radius1) btR1 = true;
                 if (max < 2 * radius2) stR2 = true;
             } else {
@@ -753,7 +754,7 @@ public class ABMSystem {
      * @return  whether or not the ABM should be fired. Returns true to fire and false 
      *                  to not fire.
      */
-    private boolean decide (ABMInput input) {
+    public boolean decide (ABMInput input) {
         this.CMV[0] = this.checkLIC0(input);
         this.CMV[1] = this.checkLIC1(input);
         this.CMV[2] = this.checkLIC2(input);
@@ -772,7 +773,7 @@ public class ABMSystem {
 
         // Construct the PUM from the results of the CMV
         this.computePUM(input);
-
+        //System.out.println(this.PUM);
         // Constructs the FUV from the PUM
         this.computeFUV(input);
 
