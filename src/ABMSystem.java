@@ -278,9 +278,12 @@ public class ABMSystem {
         
         // body-start
         // N_PTS < 3
-        if (input.PARAMETERS.getNPoints() < 3) {
+        if (input.NUMPOINTS < 3) {
             return false;
         }
+        System.out.println("DIST == " + input.PARAMETERS.getDist());
+        System.out.println("N_PTS == " + input.PARAMETERS.getNPoints());
+        
         for (int i = 0; i < input.NUMPOINTS - input.PARAMETERS.getNPoints(); i++) {
             endPoint1 = points.get(i);
             endPoint2 = points.get(i + input.PARAMETERS.getNPoints() - 1);
@@ -291,13 +294,23 @@ public class ABMSystem {
                 a = (endPoint2.getY() - endPoint1.getY()) / (endPoint1.getY() * endPoint2.getX() - endPoint2.getY() * endPoint1.getX());
                 b = (endPoint1.getX() - endPoint2.getX()) / (endPoint1.getY() * endPoint2.getX() - endPoint2.getY() * endPoint1.getX());
                 // for each point in the sequence check if the distance to the line ax + by + c = 0 is greater than DIST
-                for (int j = 0; j < input.PARAMETERS.getNPoints(); j++) {
-                    distance = Math.abs(a * points.get(i + j).getX() + b * points.get(i + j).getY() + c) / Math.sqrt(a * a + b * b);
+                System.out.println("nPoints = " + input.PARAMETERS.getNPoints());
+                for (int j = 1; j < input.PARAMETERS.getNPoints() - 1; j++) {
+                    // if the line equation is of type y = t
+                    if (endPoint2.getY() == endPoint1.getY()) {
+                        distance = Math.abs(points.get(i + j).getY() - endPoint2.getY());
+                        // if the line equation is of type x = t
+                    } else if (endPoint2.getX() == endPoint1.getX()) {
+                        distance = Math.abs(points.get(i + j).getX() - endPoint2.getX());
+                    } else {
+                        distance = Math.abs(a * points.get(i + j).getX() + b * points.get(i + j).getY() + c) / Math.sqrt(a * a + b * b);
+                    }
+                    System.out.println("distance == " + distance + " " + i + " " + j + "a = " + a + "b = " + b + "c = " + c);
                     if (distance > input.PARAMETERS.getDist()) {
                         holds = true;
                     }
                 }
-            // endPoint1 == endPoint2
+                // endPoint1 == endPoint2
             } else {
                 // for each point in the sequence check if the distance from it to the point endPoint1 is greater than DIST
                 for (int j = 0; j < input.PARAMETERS.getNPoints(); j++) {

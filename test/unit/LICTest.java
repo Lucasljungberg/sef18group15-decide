@@ -4,7 +4,21 @@ import java.util.Arrays;
 public class LICTest {
     public static void main(String[] args) {
         LICTest test = new LICTest();
+        test.testLIC0();
+        test.testLIC1();
+        test.testLIC2();
+        test.testLIC3();
         test.testLIC4();
+        test.testLIC5();
+        test.testLIC6();
+        test.testLIC7();
+        test.testLIC8();
+        test.testLIC9();
+        test.testLIC10();
+        test.testLIC11();
+        test.testLIC12();
+        test.testLIC13();
+        test.testLIC14();
     }
     
     public void testLIC0() {
