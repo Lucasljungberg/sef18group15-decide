@@ -4,9 +4,7 @@ import java.util.ArrayList;
 public class ABMSystem {
 
     public static void main(String[] args) {
-        ABMInputHandler inputHandler = new ABMInputHandler();
-        ABMInput input = inputHandler.fetch();
-        ABMSystem system = new ABMSystem(input);
+        new ABMSystem();
     }
 
     /**
@@ -42,6 +40,15 @@ public class ABMSystem {
     
     public ABMSystem (ABMInput input) {
         this.input = input;
+    }
+
+    /**
+     * Empty constructor fetches input from stdin
+     * @return an ABMSystem object
+     */
+    public ABMSystem () {
+        this.input = (new ABMInputHandler()).fetch();
+        System.out.println("Decide: " + this.decide(input));
     }
 
     
