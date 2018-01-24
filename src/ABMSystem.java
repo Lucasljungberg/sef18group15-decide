@@ -281,8 +281,7 @@ public class ABMSystem {
         if (input.NUMPOINTS < 3) {
             return false;
         }
-        System.out.println("DIST == " + input.PARAMETERS.getDist());
-        System.out.println("N_PTS == " + input.PARAMETERS.getNPoints());
+
         
         for (int i = 0; i < input.NUMPOINTS - input.PARAMETERS.getNPoints(); i++) {
             endPoint1 = points.get(i);
@@ -294,7 +293,7 @@ public class ABMSystem {
                 a = (endPoint2.getY() - endPoint1.getY()) / (endPoint1.getY() * endPoint2.getX() - endPoint2.getY() * endPoint1.getX());
                 b = (endPoint1.getX() - endPoint2.getX()) / (endPoint1.getY() * endPoint2.getX() - endPoint2.getY() * endPoint1.getX());
                 // for each point in the sequence check if the distance to the line ax + by + c = 0 is greater than DIST
-                System.out.println("nPoints = " + input.PARAMETERS.getNPoints());
+                // 
                 for (int j = 1; j < input.PARAMETERS.getNPoints() - 1; j++) {
                     // if the line equation is of type y = t
                     if (endPoint2.getY() == endPoint1.getY()) {
@@ -305,7 +304,7 @@ public class ABMSystem {
                     } else {
                         distance = Math.abs(a * points.get(i + j).getX() + b * points.get(i + j).getY() + c) / Math.sqrt(a * a + b * b);
                     }
-                    System.out.println("distance == " + distance + " " + i + " " + j + "a = " + a + "b = " + b + "c = " + c);
+
                     if (distance > input.PARAMETERS.getDist()) {
                         holds = true;
                     }
@@ -442,11 +441,9 @@ public class ABMSystem {
         
         // The condition is not met when NUMPOINTS < 5
         if (input.NUMPOINTS < 5) {
-            System.out.println("NUMPOINTS < 5");
             return false;
         }
-        System.out.println("cPoints == " + input.PARAMETERS.getCPoints());
-        System.out.println("dPoints == " + input.PARAMETERS.getDPoints());
+
         for (int i = 0; i < points.size() - input.PARAMETERS.getCPoints() - input.PARAMETERS.getDPoints() - 2; i++) {
             // Prepare next iteration by moving the points one step forward in the input
             
@@ -477,7 +474,7 @@ public class ABMSystem {
             }
             
         }
-        System.out.println("holds == false");
+
         return holds;
     }
     /** check if the LIC10 holds
@@ -572,11 +569,9 @@ public class ABMSystem {
         
         for (int i = 0; i < points.size() - kpts - 1; i++) {
             if (points.get(i).distanceTo(points.get(i+kpts+1)) > length1) {
-                System.out.println("more than " + length1 + " apart");
                 holds1 = true;
             }
             if (points.get(i).distanceTo(points.get(i+kpts+1)) < length2) {
-                System.out.println("less than " + length2 + " apart");
                 holds2 = true;
             }
         }
@@ -589,7 +584,7 @@ public class ABMSystem {
     /** check if the LIC13 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC13 () {
+    public boolean checkLIC13 (ABMInput input) {
         if (input.NUMPOINTS < 5) return false;
  
         int apts = input.PARAMETERS.getAPoints();
