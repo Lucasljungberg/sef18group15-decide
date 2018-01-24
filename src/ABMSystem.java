@@ -70,17 +70,62 @@ public class ABMSystem {
     /** check if the LIC1 holds
      * @return true if the LIC holds, false otherwise
      */
-    public boolean checkLIC1 () {
-        // holds = return result
-        boolean holds = true;
-        
+    public boolean checkLIC1 (ABMInput input) {
         // body-start
+        Point p1;
+        Point p2;
+        Point p3;
+        int i = 0;
+        int end = 3;
+        while (end <= input.NUMPOINTS) {
+            p1 = input.POINTS[i];
+            p2 = input.POINTS[i + 1];
+            p3 = input.POINTS[i + 2];
+            
+            // Find the length of all legs that form a triangle
+            double a = p1.distanceTo(p2);
+            double b = p1.distanceTo(p3);
+            double c = p2.distanceTo(p3);
+            
+            double angle = Math.PI;
+            double max = 0.0;
+            
+            // Find the longest leg. Check if angle of the other two legs are < 90 degrees
+            if (a > b && a > c) {
+                angle = Math.acos(
+                                  (Math.pow(b, 2) + Math.pow(c, 2) - Math.pow(a, 2)) /
+                                  (2 * b * c)
+                                  );
+                max = a;
+            } else if (b > a && b > c) {
+                angle = Math.acos(
+                                  (Math.pow(a, 2) + Math.pow(c, 2) - Math.pow(b, 2)) /
+                                  (2 * a * c)
+                                  );
+                max = b;
+            } else if (c > a && c > b) {
+                angle = Math.acos(
+                                  (Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2)) /
+                                  (2 * a * b)
+                                  );
+                max = c;
+            }
+            
+            if (angle > Math.PI) {
+                if (max > 2 * input.PARAMETERS.getRadius1()) return false;
+            } else {
+                // Find the smallest circle that fits all three points
+                double minRadius = (a*b*c) /
+                Math.sqrt((a+b+c)*(b+c-a)*(c+a-b)*(a+b-c));
+                
+                if (minRadius > input.PARAMETERS.getRadius1()) return true;
+            }
+            i++;
+            end++;
+        }
         
-        // -- add here -- Use input.NUMPOINTS, input.length1, etc.
-        
-        // body-end
-        
-        return holds;
+        // All points fit inside a circle
+        return false;
     }
 
     /** 
