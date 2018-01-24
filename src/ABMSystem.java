@@ -717,7 +717,12 @@ public class ABMSystem {
                 this.FUV[i] = true;
             } else {
                 for (int j = 0; j < 15; j++) {
-                    if (!this.PUM[i][j]) break;
+                    if (!this.PUM[i][j]) {
+                        this.FUV[i] = false;
+                        break;
+                    } else {
+                        this.FUV[i] = true;
+                    }
                 }
             }
 
