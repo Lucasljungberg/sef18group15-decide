@@ -43,13 +43,10 @@ public class Point {
      * @return the quadrant in which the point is in
      */
     public int quadrant () {
-        if (this.x >= 0) {
-            if (this.y >= 0) return 1;
-            else return 4;
-        } else {
-            if (this.y >= 0) return 2;
-            else return 3;
-        }
+        if (this.x >= 0 && this.y >= 0) return 1;
+        else if (this.x <= 0 && this.y >= 0) return 2;
+        else if (this.x <= 0 && this.y <= 0) return 3;
+        else return 4;
     }
 
     /**
