@@ -52,6 +52,35 @@ public class PointTest {
             "Failed! Expected 3 but got %d",
             p.quadrant());
         System.out.println("OK!");
+
+        p = new Point(1,-2);
+        System.out.print("Testing quadrant (test 3)...");
+        assert 4 == p.quadrant() : String.format (
+            "Failed! Expected 4 but got %d",
+            p.quadrant());
+        System.out.println("OK!"); 
+
+        // Test base cases
+        p = new Point(0,0);
+        System.out.print("Testing quadrant (test 4)...");
+        assert 1 == p.quadrant() : String.format (
+            "Failed! Expected 1 but got %d",
+            p.quadrant());
+        System.out.println("OK!");
+
+        p = new Point(-1,0);
+        System.out.print("Testing quadrant (test 5)...");
+        assert 2 == p.quadrant() : String.format (
+            "Failed! Expected 2 but got %d",
+            p.quadrant());
+        System.out.println("OK!");  
+
+        p = new Point(0,-1);
+        System.out.print("Testing quadrant (test 6)...");
+        assert 3 == p.quadrant() : String.format (
+            "Failed! Expected 3 but got %d",
+            p.quadrant());
+        System.out.println("OK!"); 
     }
 
     private void testDistanceTo () {
